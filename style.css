@@ -141,6 +141,18 @@ header.scrolled {
     font-size: 2rem;
 }
 
+.logo-img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.logo:hover .logo-img {
+    transform: scale(1.05);
+}
+
 /* Theme Toggle Button */
 .theme-toggle {
     position: fixed;
