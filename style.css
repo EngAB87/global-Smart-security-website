@@ -1916,4 +1916,42 @@ footer::before {
         text-align: center !important;
     }
 }
+/* === تحسين عرض الأقسام والشبكة للهواتف === */
+@media (max-width: 768px) {
+    .section {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 20px 10px !important;
+        box-sizing: border-box !important;
+    }
+
+    .section .container, .section .row {
+        width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .section img {
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+    }
+
+    /* لو فيه صفوف عدة أعمدة */
+    .row {
+        flex-direction: column !important;
+    }
+
+    /* تأكد إن أي عنصر floated يتصرف بشكل طبيعي */
+    .clearfix::after {
+        content: "" !important;
+        display: block !important;
+        clear: both !important;
+    }
+}
 
