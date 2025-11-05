@@ -1317,9 +1317,36 @@ footer::before {
 }
 
 /* Responsive Design */
+@media (max-width: 968px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .services-overview .container {
+        grid-template-columns: 1fr;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
 @media (max-width: 768px) {
+    body {
+        font-size: 15px;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
     .hamburger {
         display: flex;
+        z-index: 1001;
+    }
+
+    [data-theme="dark"] .hamburger span {
+        background-color: var(--text-color);
     }
 
     .nav-menu {
@@ -1327,102 +1354,374 @@ footer::before {
         right: -100%;
         top: 70px;
         flex-direction: column;
-        background-color: white;
+        background-color: var(--bg-color);
         width: 100%;
         text-align: center;
-        transition: 0.3s;
-        box-shadow: var(--shadow);
+        transition: right 0.3s ease;
+        box-shadow: var(--shadow-lg);
         padding: 2rem 0;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        z-index: 999;
+    }
+
+    [data-theme="dark"] .nav-menu {
+        background-color: var(--card-bg);
+        border-right: 1px solid rgba(96, 165, 250, 0.15);
     }
 
     .nav-menu.active {
         right: 0;
     }
 
-    .hero-title {
-        font-size: 2.5rem;
+    .nav-menu li {
+        margin: 0.5rem 0;
     }
 
-    .hero-subtitle {
-        font-size: 1.5rem;
+    .nav-menu a {
+        display: block;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
     }
 
-    .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .contact-content {
-        grid-template-columns: 1fr;
-    }
-
-    .products-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .section-header h2 {
-        font-size: 2rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-title {
-        font-size: 2rem;
-    }
-
-    .hero-subtitle {
+    .logo {
         font-size: 1.2rem;
+        gap: 0.3rem;
+    }
+
+    .logo-img {
+        height: 45px;
+    }
+
+    .logo span {
+        font-size: 0.9rem;
+    }
+
+    .theme-toggle {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        left: 20px;
+        font-size: 1.2rem;
+    }
+
+    .hero {
+        height: auto;
+        min-height: 100vh;
+        padding: 4rem 1rem 3rem;
+    }
+
+    .hero-content {
+        padding: 1rem;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .hero-logo {
+        height: 60px;
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+        line-height: 1.5;
     }
 
     .hero-description {
         font-size: 1rem;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
     }
-}
-/* === Mobile Responsive Enhancements === */
-@media (max-width: 768px) {
-    /* تعديل حجم العناوين */
-    h1, h2 {
-        font-size: 24px;
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 0.8rem;
+        width: 100%;
+    }
+
+    .btn {
+        padding: 0.9rem 2rem;
+        font-size: 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .services-overview {
+        padding: 3rem 0;
+    }
+
+    .services-overview .container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .service-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .service-icon {
+        width: 80px;
+        height: 80px;
+    }
+
+    .service-icon i {
+        font-size: 2.5rem;
+    }
+
+    .service-card h3 {
+        font-size: 1.4rem;
+    }
+
+    .service-card p {
+        font-size: 1rem;
+    }
+
+    .products-section {
+        padding: 4rem 0;
+    }
+
+    .section-header {
+        margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.8rem;
+        line-height: 1.4;
+    }
+
+    .section-header p {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        padding: 0 10px;
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .product-card {
+        border-radius: 20px;
+    }
+
+    .product-image {
+        min-height: 200px;
+        padding: 2rem;
+    }
+
+    .product-image i {
+        font-size: 4rem;
+    }
+
+    .product-info {
+        padding: 1.5rem;
+    }
+
+    .product-info h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+
+    .product-description {
+        font-size: 0.95rem;
+        line-height: 1.8;
+    }
+
+    .why-us {
+        padding: 3rem 0;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .feature-box {
+        padding: 1.5rem;
+    }
+
+    .feature-box i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .feature-box h3 {
+        font-size: 1.2rem;
+    }
+
+    .feature-box p {
+        font-size: 0.95rem;
+    }
+
+    .contact-section {
+        padding: 3rem 0;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .contact-item {
+        padding: 1.2rem;
+        flex-direction: row;
+    }
+
+    .contact-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .contact-icon i {
+        font-size: 1.5rem;
+    }
+
+    .contact-item h3 {
+        font-size: 1.1rem;
+    }
+
+    .contact-item p {
+        font-size: 1rem;
+    }
+
+    .social-icons {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .social-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.4rem;
+    }
+
+    .contact-form {
+        padding: 2rem 1.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 1rem;
+        padding: 0.9rem;
+    }
+
+    footer {
+        padding: 2rem 0 1rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
         text-align: center;
     }
 
-    /* تعديل النصوص */
-    p {
+    .footer-section h3 {
+        font-size: 1.2rem;
+    }
+
+    .footer-section a {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
         font-size: 14px;
-        line-height: 1.6;
     }
 
-    /* اللوجو */
-    .logo img {
-        width: 120px;
-        margin: 0 auto;
-        display: block;
+    .container {
+        padding: 0 10px;
     }
 
-    /* تنسيق الـ Navigation */
-    nav ul {
+    .logo {
+        font-size: 1rem;
+    }
+
+    .logo-img {
+        height: 40px;
+    }
+
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .hero-logo {
+        height: 50px;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
+    }
+
+    .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .section-header p {
+        font-size: 0.95rem;
+    }
+
+    .service-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .service-card p {
+        font-size: 0.95rem;
+    }
+
+    .product-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .product-description {
+        font-size: 0.9rem;
+    }
+
+    .feature-box h3 {
+        font-size: 1.1rem;
+    }
+
+    .contact-item {
         flex-direction: column;
-        align-items: center;
-        gap: 12px;
+        text-align: center;
     }
 
-    /* صور أكبر تتناسب مع الشاشات الصغيرة */
-    img {
-        max-width: 100%;
-        height: auto;
-    }
-
-    /* زر احجز أو تواصل */
-    .cta-btn {
-        padding: 12px 18px;
-        font-size: 16px;
-        width: 90%;
+    .contact-icon {
         margin: 0 auto;
-        display: block;
     }
 
-    /* تقليل الحشو (padding / margin) لبعض الأقسام */
-    .section {
-        padding: 20px 10px;
+    .theme-toggle {
+        width: 45px;
+        height: 45px;
+        bottom: 15px;
+        left: 15px;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: 1.3rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
     }
 }
