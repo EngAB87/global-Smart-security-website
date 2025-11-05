@@ -253,6 +253,21 @@ header.scrolled {
     opacity: 0.3;
 }
 
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background: url('logo.png') no-repeat center;
+    background-size: contain;
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 0;
+}
+
 .hero-overlay {
     position: absolute;
     top: 0;
@@ -546,12 +561,16 @@ box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
 .products-section::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 200px;
-    background: linear-gradient(to bottom, rgba(248, 250, 252, 0) 0%, rgba(248, 250, 252, 0.5) 100%);
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%) rotate(15deg);
+    width: 400px;
+    height: 400px;
+    background: url('logo.png') no-repeat center;
+    background-size: contain;
+    opacity: 0.03;
     pointer-events: none;
+    z-index: 0;
 }
 
 [data-theme="dark"] .products-section::before {
