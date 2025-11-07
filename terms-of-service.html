@@ -95,9 +95,34 @@
             color: rgba(255, 255, 255, 0.6);
             border-color: rgba(255, 255, 255, 0.1);
         }
+        [data-theme="dark"] .policy-content h2 {
+            color: #60a5fa;
+        }
+        [data-theme="dark"] .back-link {
+            color: #60a5fa;
+        }
+        [data-theme="dark"] .back-link:hover {
+            color: #10b981;
+        }
+        [data-theme="dark"] .policy-content a {
+            color: #60a5fa;
+        }
+        [data-theme="dark"] .policy-content a:hover {
+            color: #10b981;
+        }
+        [data-theme="dark"] .policy-content strong {
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
+    <script>
+        // Initialize theme before page loads to prevent flash
+        (function() {
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+        })();
+    </script>
     <!-- Header -->
     <header>
         <nav class="navbar">

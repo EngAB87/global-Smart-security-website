@@ -2494,9 +2494,22 @@ footer::after {
 }
 
 [data-theme="dark"] .toast {
-    background: rgba(15, 23, 42, 0.95);
+    background: rgba(15, 23, 42, 0.98);
     color: #ffffff;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+    border-right-color: #10b981;
+}
+
+[data-theme="dark"] .toast.error {
+    border-right-color: #ef4444;
+}
+
+[data-theme="dark"] .toast.warning {
+    border-right-color: #f59e0b;
+}
+
+[data-theme="dark"] .toast.info {
+    border-right-color: #3b82f6;
 }
 
 .toast-icon {

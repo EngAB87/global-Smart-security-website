@@ -35,7 +35,9 @@ html.setAttribute('data-theme', currentTheme);
 
 // Update icon based on theme
 function updateThemeIcon() {
+    if (!themeToggle) return;
     const icon = themeToggle.querySelector('i');
+    if (!icon) return;
     if (html.getAttribute('data-theme') === 'dark') {
         icon.className = 'fas fa-sun';
     } else {
@@ -43,18 +45,24 @@ function updateThemeIcon() {
     }
 }
 
-updateThemeIcon();
+// Wait for DOM to be ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateThemeIcon);
+} else {
+    updateThemeIcon();
+}
 
 // Toggle theme
-themeToggle.addEventListener('click', () => {
-    const currentTheme = html.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    html.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeIcon();
-    
-    // Add animation
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon();
+        
+        // Add animation
     themeToggle.style.transform = 'rotate(360deg) scale(1.2)';
     setTimeout(() => {
         themeToggle.style.transform = '';
