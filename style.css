@@ -404,6 +404,39 @@ header.scrolled {
     transform: scale(1.2);
 }
 
+.btn-primary.loading {
+    pointer-events: none;
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+.btn-primary.loading .btn-text {
+    display: none;
+}
+
+.btn-primary.loading .btn-loader {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-loader {
+    display: none;
+}
+
+.btn-loader i {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .btn-secondary {
     background-color: rgba(255, 255, 255, 0.1);
     color: white;

@@ -132,6 +132,7 @@ document.querySelectorAll('.product-card, .service-card, .feature-box').forEach(
 
 // Contact Form Handling
 const contactForm = document.getElementById('contactForm');
+const submitBtn = document.getElementById('submitBtn');
 
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -141,20 +142,31 @@ contactForm.addEventListener('submit', (e) => {
     const email = document.getElementById('email').value;
     const message = document.getElementById('message').value;
     
-    // Create WhatsApp message
-    const whatsappMessage = `مرحباً، أنا ${name}%0A` +
-                           `رقم الهاتف: ${phone}%0A` +
-                           `${email ? `البريد الإلكتروني: ${email}%0A` : ''}` +
-                           `الرسالة: ${message}`;
+    // Show loading state
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
     
-    // Open WhatsApp
-    window.open(`https://wa.me/201121153344?text=${whatsappMessage}`, '_blank');
-    
-    // Show success message
-    alert('شكراً لتواصلك معنا! سيتم فتح واتساب لإرسال رسالتك.');
-    
-    // Reset form
-    contactForm.reset();
+    // Simulate processing delay (you can adjust this)
+    setTimeout(() => {
+        // Create WhatsApp message
+        const whatsappMessage = `مرحباً، أنا ${name}%0A` +
+                               `رقم الهاتف: ${phone}%0A` +
+                               `${email ? `البريد الإلكتروني: ${email}%0A` : ''}` +
+                               `الرسالة: ${message}`;
+        
+        // Open WhatsApp
+        window.open(`https://wa.me/201121153344?text=${whatsappMessage}`, '_blank');
+        
+        // Show success message
+        alert('شكراً لتواصلك معنا! سيتم فتح واتساب لإرسال رسالتك.');
+        
+        // Reset form
+        contactForm.reset();
+        
+        // Remove loading state
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+    }, 1000); // 1 second delay to show loading state
 });
 
 // Scroll to top on page load/refresh

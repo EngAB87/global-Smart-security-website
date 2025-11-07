@@ -390,7 +390,12 @@
                         <div class="form-group">
                             <textarea id="message" rows="5" placeholder="رسالتك" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">إرسال الرسالة</button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <span class="btn-text">إرسال الرسالة</span>
+                            <span class="btn-loader" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> جاري الإرسال...
+                            </span>
+                        </button>
                     </form>
                 </div>
             </div>
