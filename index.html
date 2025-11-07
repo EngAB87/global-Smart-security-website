@@ -1146,49 +1146,49 @@
     <div id="toastContainer" class="toast-container"></div>
     
     <!-- Chatbot -->
-    <div class="chatbot-container" id="chatbotContainer">
-        <div class="chatbot-window" id="chatbotWindow">
-            <div class="chatbot-header">
-                <div class="chatbot-header-info">
-                    <div class="chatbot-avatar">
+    <div class="chatbot-wrapper" id="chatbotWrapper">
+        <button class="chatbot-toggle-btn" id="chatbotToggleBtn" aria-label="فتح الشات">
+            <i class="fas fa-comments"></i>
+            <span class="chatbot-notification-badge" id="chatbotBadge">1</span>
+        </button>
+        <div class="chatbot-popup" id="chatbotPopup">
+            <div class="chatbot-popup-header">
+                <div class="chatbot-popup-header-left">
+                    <div class="chatbot-popup-avatar">
                         <i class="fas fa-robot"></i>
                     </div>
-                    <div>
-                        <h3>مساعد Global Smart Security</h3>
-                        <span class="chatbot-status">متصل الآن</span>
+                    <div class="chatbot-popup-info">
+                        <h4>مساعد Global Smart Security</h4>
+                        <span class="chatbot-popup-status">متصل الآن</span>
                     </div>
                 </div>
-                <button class="chatbot-close" id="chatbotClose" aria-label="إغلاق الشات">
+                <button class="chatbot-popup-close" id="chatbotCloseBtn" aria-label="إغلاق الشات">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <div class="chatbot-messages" id="chatbotMessages">
-                <div class="chatbot-message bot-message">
-                    <div class="message-avatar">
+            <div class="chatbot-popup-messages" id="chatbotMessages">
+                <div class="chatbot-message-item chatbot-message-bot">
+                    <div class="chatbot-message-avatar">
                         <i class="fas fa-robot"></i>
                     </div>
-                    <div class="message-content">
+                    <div class="chatbot-message-bubble">
                         <p>مرحباً! 👋 أنا مساعدك الذكي من Global Smart Security. كيف يمكنني مساعدتك اليوم؟</p>
-                        <span class="message-time">الآن</span>
+                        <span class="chatbot-message-time">الآن</span>
                     </div>
                 </div>
             </div>
-            <div class="chatbot-quick-replies" id="chatbotQuickReplies">
-                <button class="quick-reply-btn" onclick="sendQuickMessage('ما هي خدماتكم؟')">ما هي خدماتكم؟</button>
-                <button class="quick-reply-btn" onclick="sendQuickMessage('كم سعر الكاميرات؟')">أسعار الكاميرات</button>
-                <button class="quick-reply-btn" onclick="sendQuickMessage('كيف أتواصل معكم؟')">التواصل</button>
+            <div class="chatbot-popup-quick-replies" id="chatbotQuickReplies">
+                <button class="chatbot-quick-reply" data-message="ما هي خدماتكم؟">ما هي خدماتكم؟</button>
+                <button class="chatbot-quick-reply" data-message="كم سعر الكاميرات؟">أسعار الكاميرات</button>
+                <button class="chatbot-quick-reply" data-message="كيف أتواصل معكم؟">التواصل</button>
             </div>
-            <div class="chatbot-input-container">
+            <div class="chatbot-popup-input">
                 <input type="text" id="chatbotInput" placeholder="اكتب رسالتك هنا..." autocomplete="off">
-                <button class="chatbot-send" id="chatbotSend" aria-label="إرسال">
+                <button class="chatbot-send-btn" id="chatbotSendBtn" aria-label="إرسال">
                     <i class="fas fa-paper-plane"></i>
                 </button>
             </div>
         </div>
-        <button class="chatbot-toggle" id="chatbotToggle" aria-label="فتح الشات">
-            <i class="fas fa-comments"></i>
-            <span class="chatbot-badge">1</span>
-        </button>
     </div>
 
     <!-- Schema.org Structured Data -->

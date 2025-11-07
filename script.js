@@ -425,246 +425,222 @@ function copyProductLink(url) {
     copyToClipboard(url, button);
 }
 
-// Chatbot Functionality
-function initChatbot() {
-    const chatbotToggle = document.getElementById('chatbotToggle');
-    const chatbotWindow = document.getElementById('chatbotWindow');
-    const chatbotClose = document.getElementById('chatbotClose');
+// Chatbot Functionality - New Clean Implementation
+(function() {
+    'use strict';
+    
+    // Get all chatbot elements
+    const chatbotToggleBtn = document.getElementById('chatbotToggleBtn');
+    const chatbotPopup = document.getElementById('chatbotPopup');
+    const chatbotCloseBtn = document.getElementById('chatbotCloseBtn');
     const chatbotInput = document.getElementById('chatbotInput');
-    const chatbotSend = document.getElementById('chatbotSend');
+    const chatbotSendBtn = document.getElementById('chatbotSendBtn');
     const chatbotMessages = document.getElementById('chatbotMessages');
-    const chatbotBadge = document.querySelector('.chatbot-badge');
-    const chatbotContainer = document.getElementById('chatbotContainer');
+    const chatbotBadge = document.getElementById('chatbotBadge');
+    const chatbotQuickReplies = document.getElementById('chatbotQuickReplies');
     
-    // Ensure chatbot is visible
-    if (chatbotContainer) {
-        chatbotContainer.style.display = 'block';
-        chatbotContainer.style.visibility = 'visible';
-        chatbotContainer.style.opacity = '1';
-    }
+    if (!chatbotToggleBtn || !chatbotPopup) return;
     
-    if (chatbotToggle) {
-        chatbotToggle.style.display = 'flex';
-        chatbotToggle.style.visibility = 'visible';
-        chatbotToggle.style.opacity = '1';
-    }
+    // Toggle chatbot popup
+    chatbotToggleBtn.addEventListener('click', () => {
+        chatbotPopup.classList.toggle('active');
+        if (chatbotPopup.classList.contains('active')) {
+            if (chatbotBadge) chatbotBadge.style.display = 'none';
+            if (chatbotInput) chatbotInput.focus();
+        }
+    });
     
-    // Toggle chatbot window
-    if (chatbotToggle && chatbotWindow) {
-        chatbotToggle.addEventListener('click', () => {
-            chatbotWindow.classList.toggle('active');
-            if (chatbotWindow.classList.contains('active')) {
-                if (chatbotBadge) chatbotBadge.style.display = 'none';
-                if (chatbotInput) chatbotInput.focus();
-            }
+    // Close chatbot popup
+    if (chatbotCloseBtn) {
+        chatbotCloseBtn.addEventListener('click', () => {
+            chatbotPopup.classList.remove('active');
         });
     }
     
-    return { chatbotToggle, chatbotWindow, chatbotClose, chatbotInput, chatbotSend, chatbotMessages, chatbotBadge };
-}
-
-// Initialize chatbot when DOM is ready
-let chatbotElements = {};
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        chatbotElements = initChatbot();
-    });
-} else {
-    chatbotElements = initChatbot();
-}
-
-// Close chatbot
-if (chatbotElements.chatbotClose && chatbotElements.chatbotWindow) {
-    chatbotElements.chatbotClose.addEventListener('click', () => {
-        chatbotElements.chatbotWindow.classList.remove('active');
-    });
-}
-
-// Chatbot responses
-const chatbotResponses = {
-    'خدمات': 'نقدم مجموعة شاملة من الخدمات الأمنية:\n\n📹 كاميرات المراقبة (PTZ، داخلية، خارجية)\n💾 أجهزة DVR & NVR للتسجيل\n💰 أنظمة نقاط البيع (POS)\n📊 أنظمة الحسابات\n🎨 خدمات التصميم الجرافيكي\n\nأي خدمة تريد معرفة المزيد عنها؟',
-    'سعر': 'أسعارنا تنافسية وتختلف حسب المتطلبات. للحصول على عرض سعر دقيق، يرجى التواصل معنا:\n\n📞 الهاتف: +20 112 1153 344\n📧 البريد: info@globalsmartsecurity.com\n💬 واتساب: متاح 24/7\n\nنوفر استشارة مجانية لتقييم احتياجاتك!',
-    'كاميرا': 'نوفر أنواع مختلفة من الكاميرات:\n\n🎥 كاميرات PTZ المتحركة - للمساحات الواسعة\n🏠 كاميرات داخلية - للمحلات والمكاتب\n🛡️ كاميرات خارجية - مقاومة للعوامل الجوية\n\nجميع الكاميرات بجودة عالية ودعم رؤية ليلية!',
-    'تواصل': 'يمكنك التواصل معنا عبر:\n\n📞 الهاتف: +20 112 1153 344\n📧 البريد: info@globalsmartsecurity.com\n💬 واتساب: اضغط على زر واتساب في الموقع\n🌐 فيسبوك: متاح على صفحتنا\n\nنرد خلال 24 ساعة!',
-    'موقع': 'نحن متواجدون في مصر ونساعد عملاءنا في جميع أنحاء البلاد. يمكننا زيارة موقعك لتقييم احتياجاتك وتقديم الحلول المناسبة.',
-    'تركيب': 'نوفر خدمة تركيب احترافية:\n\n✅ معاينة مجانية للموقع\n✅ تصميم نظام مخصص\n✅ تركيب احترافي\n✅ تدريب على الاستخدام\n✅ ضمان وصيانة\n\nمدة التركيب: يوم واحد للمشاريع الصغيرة، 2-3 أيام للمتوسطة.',
-    'صيانة': 'نوفر باقات صيانة شاملة:\n\n🔧 صيانة دورية شهرية/ربع سنوية/سنوية\n🔍 فحص شامل للأنظمة\n🧹 تنظيف الكاميرات\n🔄 تحديث البرمجيات\n⚡ إصلاح الأعطال\n\nللمزيد من التفاصيل، تواصل معنا!',
-    'كاشير': 'أنظمة الكاشير لدينا تشمل:\n\n💰 نظام POS متكامل\n📊 إدارة المخزون\n💳 دعم البطاقات الائتمانية\n📱 تطبيق موبايل\n📈 تقارير مبيعات\n\nنوفر تدريب كامل على الاستخدام!',
-    'محاسبة': 'أنظمة المحاسبة لدينا:\n\n📊 نظام محاسبة شامل\n📈 تقارير مالية متقدمة\n💰 إدارة الفواتير\n👥 إدارة الموظفين والرواتب\n📋 تقارير ضريبية\n\nسهل الاستخدام ومتوافق مع القوانين المصرية!',
-    'default': 'شكراً لسؤالك! يمكنني مساعدتك في:\n\n✅ معلومات عن خدماتنا\n💰 الأسعار والعروض\n📞 طرق التواصل\n📹 أنواع الكاميرات\n💾 أجهزة التسجيل\n🔧 الصيانة والتركيب\n\nاكتب سؤالك أو اختر من الأزرار السريعة!'
-};
-
-// Get bot response
-function getBotResponse(userMessage) {
-    const message = userMessage.toLowerCase();
+    // Chatbot responses
+    const chatbotResponses = {
+        'خدمات': 'نقدم مجموعة شاملة من الخدمات الأمنية:\n\n📹 كاميرات المراقبة (PTZ، داخلية، خارجية)\n💾 أجهزة DVR & NVR للتسجيل\n💰 أنظمة نقاط البيع (POS)\n📊 أنظمة الحسابات\n🎨 خدمات التصميم الجرافيكي\n\nأي خدمة تريد معرفة المزيد عنها؟',
+        'سعر': 'أسعارنا تنافسية وتختلف حسب المتطلبات. للحصول على عرض سعر دقيق، يرجى التواصل معنا:\n\n📞 الهاتف: +20 112 1153 344\n📧 البريد: info@globalsmartsecurity.com\n💬 واتساب: متاح 24/7\n\nنوفر استشارة مجانية لتقييم احتياجاتك!',
+        'كاميرا': 'نوفر أنواع مختلفة من الكاميرات:\n\n🎥 كاميرات PTZ المتحركة - للمساحات الواسعة\n🏠 كاميرات داخلية - للمحلات والمكاتب\n🛡️ كاميرات خارجية - مقاومة للعوامل الجوية\n\nجميع الكاميرات بجودة عالية ودعم رؤية ليلية!',
+        'تواصل': 'يمكنك التواصل معنا عبر:\n\n📞 الهاتف: +20 112 1153 344\n📧 البريد: info@globalsmartsecurity.com\n💬 واتساب: اضغط على زر واتساب في الموقع\n🌐 فيسبوك: متاح على صفحتنا\n\nنرد خلال 24 ساعة!',
+        'موقع': 'نحن متواجدون في مصر ونساعد عملاءنا في جميع أنحاء البلاد. يمكننا زيارة موقعك لتقييم احتياجاتك وتقديم الحلول المناسبة.',
+        'تركيب': 'نوفر خدمة تركيب احترافية:\n\n✅ معاينة مجانية للموقع\n✅ تصميم نظام مخصص\n✅ تركيب احترافي\n✅ تدريب على الاستخدام\n✅ ضمان وصيانة\n\nمدة التركيب: يوم واحد للمشاريع الصغيرة، 2-3 أيام للمتوسطة.',
+        'صيانة': 'نوفر باقات صيانة شاملة:\n\n🔧 صيانة دورية شهرية/ربع سنوية/سنوية\n🔍 فحص شامل للأنظمة\n🧹 تنظيف الكاميرات\n🔄 تحديث البرمجيات\n⚡ إصلاح الأعطال\n\nللمزيد من التفاصيل، تواصل معنا!',
+        'كاشير': 'أنظمة الكاشير لدينا تشمل:\n\n💰 نظام POS متكامل\n📊 إدارة المخزون\n💳 دعم البطاقات الائتمانية\n📱 تطبيق موبايل\n📈 تقارير مبيعات\n\nنوفر تدريب كامل على الاستخدام!',
+        'محاسبة': 'أنظمة المحاسبة لدينا:\n\n📊 نظام محاسبة شامل\n📈 تقارير مالية متقدمة\n💰 إدارة الفواتير\n👥 إدارة الموظفين والرواتب\n📋 تقارير ضريبية\n\nسهل الاستخدام ومتوافق مع القوانين المصرية!',
+        'default': 'شكراً لسؤالك! يمكنني مساعدتك في:\n\n✅ معلومات عن خدماتنا\n💰 الأسعار والعروض\n📞 طرق التواصل\n📹 أنواع الكاميرات\n💾 أجهزة التسجيل\n🔧 الصيانة والتركيب\n\nاكتب سؤالك أو اختر من الأزرار السريعة!'
+    };
     
-    if (message.includes('خدمات') || message.includes('خدمة') || message.includes('ماذا تقدم')) {
-        return chatbotResponses['خدمات'];
-    } else if (message.includes('سعر') || message.includes('ثمن') || message.includes('تكلفة') || message.includes('كم')) {
-        return chatbotResponses['سعر'];
-    } else if (message.includes('كاميرا') || message.includes('كاميرات') || message.includes('مراقبة')) {
-        return chatbotResponses['كاميرا'];
-    } else if (message.includes('تواصل') || message.includes('اتصل') || message.includes('راسل') || message.includes('كيف')) {
-        return chatbotResponses['تواصل'];
-    } else if (message.includes('موقع') || message.includes('عنوان') || message.includes('مكان')) {
-        return chatbotResponses['موقع'];
-    } else if (message.includes('تركيب') || message.includes('تركب') || message.includes('مدة')) {
-        return chatbotResponses['تركيب'];
-    } else if (message.includes('صيانة') || message.includes('صيان') || message.includes('صيانه')) {
-        return chatbotResponses['صيانة'];
-    } else if (message.includes('كاشير') || message.includes('pos') || message.includes('نقاط بيع')) {
-        return chatbotResponses['كاشير'];
-    } else if (message.includes('محاسبة') || message.includes('حسابات') || message.includes('مالي')) {
-        return chatbotResponses['محاسبة'];
-    } else {
-        return chatbotResponses['default'];
+    // Get bot response
+    function getBotResponse(userMessage) {
+        const message = userMessage.toLowerCase();
+        
+        if (message.includes('خدمات') || message.includes('خدمة') || message.includes('ماذا تقدم')) {
+            return chatbotResponses['خدمات'];
+        } else if (message.includes('سعر') || message.includes('ثمن') || message.includes('تكلفة') || message.includes('كم')) {
+            return chatbotResponses['سعر'];
+        } else if (message.includes('كاميرا') || message.includes('كاميرات') || message.includes('مراقبة')) {
+            return chatbotResponses['كاميرا'];
+        } else if (message.includes('تواصل') || message.includes('اتصل') || message.includes('راسل') || message.includes('كيف')) {
+            return chatbotResponses['تواصل'];
+        } else if (message.includes('موقع') || message.includes('عنوان') || message.includes('مكان')) {
+            return chatbotResponses['موقع'];
+        } else if (message.includes('تركيب') || message.includes('تركب') || message.includes('مدة')) {
+            return chatbotResponses['تركيب'];
+        } else if (message.includes('صيانة') || message.includes('صيان') || message.includes('صيانه')) {
+            return chatbotResponses['صيانة'];
+        } else if (message.includes('كاشير') || message.includes('pos') || message.includes('نقاط بيع')) {
+            return chatbotResponses['كاشير'];
+        } else if (message.includes('محاسبة') || message.includes('حسابات') || message.includes('مالي')) {
+            return chatbotResponses['محاسبة'];
+        } else {
+            return chatbotResponses['default'];
+        }
     }
-}
-
-// Add message to chat
-function addMessage(text, isUser = false) {
-    const messagesContainer = chatbotElements.chatbotMessages || document.getElementById('chatbotMessages');
-    if (!messagesContainer) return null;
     
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `chatbot-message ${isUser ? 'user-message' : 'bot-message'}`;
-    
-    const avatar = document.createElement('div');
-    avatar.className = 'message-avatar';
-    avatar.innerHTML = `<i class="fas ${isUser ? 'fa-user' : 'fa-robot'}"></i>`;
-    
-    const content = document.createElement('div');
-    content.className = 'message-content';
-    
-    const textP = document.createElement('p');
-    textP.textContent = text;
-    content.appendChild(textP);
-    
-    const time = document.createElement('span');
-    time.className = 'message-time';
-    const now = new Date();
-    time.textContent = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
-    content.appendChild(time);
-    
-    messageDiv.appendChild(avatar);
-    messageDiv.appendChild(content);
-    
-    messagesContainer.appendChild(messageDiv);
-    
-    // Scroll to bottom
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    
-    return messageDiv;
-}
-
-// Send message
-function sendMessage() {
-    const input = chatbotElements.chatbotInput || document.getElementById('chatbotInput');
-    const sendBtn = chatbotElements.chatbotSend || document.getElementById('chatbotSend');
-    const messagesContainer = chatbotElements.chatbotMessages || document.getElementById('chatbotMessages');
-    
-    if (!input) return;
-    
-    const message = input.value.trim();
-    if (!message) return;
-    
-    // Add user message
-    addMessage(message, true);
-    input.value = '';
-    
-    // Disable send button
-    if (sendBtn) sendBtn.disabled = true;
-    
-    // Show typing indicator
-    const typingIndicator = addMessage('يكتب...', false);
-    
-    // Simulate bot thinking
-    setTimeout(() => {
-        if (typingIndicator) typingIndicator.remove();
+    // Add message to chat
+    function addMessage(text, isUser = false) {
+        if (!chatbotMessages) return null;
         
-        // Get bot response
-        const botResponse = getBotResponse(message);
+        const messageItem = document.createElement('div');
+        messageItem.className = `chatbot-message-item ${isUser ? 'chatbot-message-user' : 'chatbot-message-bot'}`;
         
-        // Add bot response with typing effect
-        const botMessage = addMessage('', false);
-        if (!botMessage) return;
+        const avatar = document.createElement('div');
+        avatar.className = 'chatbot-message-avatar';
+        avatar.innerHTML = `<i class="fas ${isUser ? 'fa-user' : 'fa-robot'}"></i>`;
         
-        const botText = botMessage.querySelector('p');
-        if (!botText) return;
+        const bubble = document.createElement('div');
+        bubble.className = 'chatbot-message-bubble';
         
-        let index = 0;
-        const typingInterval = setInterval(() => {
-            if (index < botResponse.length) {
-                botText.textContent = botResponse.substring(0, index + 1);
-                index++;
-                if (messagesContainer) {
-                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                }
-            } else {
-                clearInterval(typingInterval);
-                if (sendBtn) sendBtn.disabled = false;
-                if (input) input.focus();
+        const textP = document.createElement('p');
+        textP.textContent = text;
+        bubble.appendChild(textP);
+        
+        const time = document.createElement('span');
+        time.className = 'chatbot-message-time';
+        const now = new Date();
+        time.textContent = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+        bubble.appendChild(time);
+        
+        messageItem.appendChild(avatar);
+        messageItem.appendChild(bubble);
+        
+        chatbotMessages.appendChild(messageItem);
+        
+        // Scroll to bottom
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        
+        return messageItem;
+    }
+    
+    // Send message
+    function sendMessage() {
+        if (!chatbotInput) return;
+        
+        const message = chatbotInput.value.trim();
+        if (!message) return;
+        
+        // Add user message
+        addMessage(message, true);
+        chatbotInput.value = '';
+        
+        // Disable send button
+        if (chatbotSendBtn) chatbotSendBtn.disabled = true;
+        
+        // Show typing indicator
+        const typingIndicator = addMessage('يكتب...', false);
+        
+        // Simulate bot thinking
+        setTimeout(() => {
+            if (typingIndicator) typingIndicator.remove();
+            
+            // Get bot response
+            const botResponse = getBotResponse(message);
+            
+            // Add bot response with typing effect
+            const botMessage = addMessage('', false);
+            if (!botMessage) {
+                if (chatbotSendBtn) chatbotSendBtn.disabled = false;
+                return;
             }
-        }, 30);
-    }, 1000);
-}
-
-// Send quick message
-function sendQuickMessage(message) {
-    const input = chatbotElements.chatbotInput || document.getElementById('chatbotInput');
-    if (input) {
-        input.value = message;
-        sendMessage();
+            
+            const botText = botMessage.querySelector('p');
+            if (!botText) {
+                if (chatbotSendBtn) chatbotSendBtn.disabled = false;
+                return;
+            }
+            
+            let index = 0;
+            const typingInterval = setInterval(() => {
+                if (index < botResponse.length) {
+                    botText.textContent = botResponse.substring(0, index + 1);
+                    index++;
+                    if (chatbotMessages) {
+                        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                    }
+                } else {
+                    clearInterval(typingInterval);
+                    if (chatbotSendBtn) chatbotSendBtn.disabled = false;
+                    if (chatbotInput) chatbotInput.focus();
+                }
+            }, 30);
+        }, 1000);
     }
-}
-
-// Setup event listeners
-function setupChatbotListeners() {
-    const sendBtn = chatbotElements.chatbotSend || document.getElementById('chatbotSend');
-    const input = chatbotElements.chatbotInput || document.getElementById('chatbotInput');
-    const messagesContainer = chatbotElements.chatbotMessages || document.getElementById('chatbotMessages');
-    const badge = chatbotElements.chatbotBadge || document.querySelector('.chatbot-badge');
     
-    if (sendBtn) {
-        sendBtn.addEventListener('click', sendMessage);
+    // Send quick message
+    function sendQuickMessage(message) {
+        if (chatbotInput) {
+            chatbotInput.value = message;
+            sendMessage();
+        }
     }
     
-    if (input) {
-        input.addEventListener('keypress', (e) => {
+    // Setup event listeners
+    if (chatbotSendBtn) {
+        chatbotSendBtn.addEventListener('click', sendMessage);
+    }
+    
+    if (chatbotInput) {
+        chatbotInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
                 sendMessage();
             }
         });
         
-        input.addEventListener('input', () => {
-            if (sendBtn) {
-                sendBtn.disabled = !input.value.trim();
+        chatbotInput.addEventListener('input', () => {
+            if (chatbotSendBtn) {
+                chatbotSendBtn.disabled = !chatbotInput.value.trim();
             }
+        });
+    }
+    
+    // Quick reply buttons
+    if (chatbotQuickReplies) {
+        const quickReplyButtons = chatbotQuickReplies.querySelectorAll('.chatbot-quick-reply');
+        quickReplyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const message = button.getAttribute('data-message');
+                if (message) {
+                    sendQuickMessage(message);
+                }
+            });
         });
     }
     
     // Hide badge after first interaction
     let badgeHidden = false;
-    if (messagesContainer) {
+    if (chatbotMessages && chatbotBadge) {
         const observer = new MutationObserver(() => {
-            if (!badgeHidden && messagesContainer.children.length > 1) {
+            if (!badgeHidden && chatbotMessages.children.length > 1) {
                 badgeHidden = true;
-                if (badge) {
-                    badge.style.display = 'none';
-                }
+                chatbotBadge.style.display = 'none';
             }
         });
-        observer.observe(messagesContainer, { childList: true });
+        observer.observe(chatbotMessages, { childList: true });
     }
-}
+})();
 
-// Initialize listeners when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupChatbotListeners);
-} else {
-    setupChatbotListeners();
-}
 
 // Toast Notification System
 function showToast(title, message, type = 'success', duration = 3000) {
