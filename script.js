@@ -432,16 +432,12 @@ function copyProductLink(url, event) {
     }
 }
 
-// Chatbot Functionality - New Clean Implementation
+// Chatbot Functionality - DISABLED
 (function() {
     'use strict';
     
-    // Initialize chatbot when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initChatbot);
-    } else {
-        initChatbot();
-    }
+    // Chatbot is disabled - do nothing
+    return;
     
     function initChatbot() {
         // Get all chatbot elements
@@ -478,17 +474,18 @@ function copyProductLink(url, event) {
                 chatbotWrapper.style.display = 'block';
                 chatbotWrapper.style.visibility = 'visible';
                 chatbotWrapper.style.opacity = '1';
-                // Desktop - Popup on left side
-                chatbotPopup.style.position = 'fixed';
-                chatbotPopup.style.bottom = '100px';
-                chatbotPopup.style.left = '30px';
-                chatbotPopup.style.transform = 'translateX(-20px) scale(0.9) translateZ(0)';
-                chatbotPopup.style.webkitTransform = 'translateX(-20px) scale(0.9) translateZ(0)';
-                chatbotPopup.style.top = 'auto';
-                chatbotPopup.style.right = 'auto';
-                chatbotPopup.style.zIndex = '10000000';
-                chatbotPopup.style.opacity = '0';
-                chatbotPopup.style.visibility = 'hidden';
+                // Desktop - Popup on left side - Let CSS handle styling
+                chatbotPopup.style.position = '';
+                chatbotPopup.style.bottom = '';
+                chatbotPopup.style.left = '';
+                chatbotPopup.style.transform = '';
+                chatbotPopup.style.webkitTransform = '';
+                chatbotPopup.style.top = '';
+                chatbotPopup.style.right = '';
+                chatbotPopup.style.zIndex = '';
+                chatbotPopup.style.opacity = '';
+                chatbotPopup.style.visibility = '';
+                chatbotPopup.style.filter = '';
             } else {
                 // Mobile - Hidden completely
                 chatbotWrapper.style.display = 'none';
@@ -517,25 +514,15 @@ function copyProductLink(url, event) {
             if (chatbotPopup.classList.contains('active')) {
                 if (chatbotBadge) chatbotBadge.style.display = 'none';
                 if (chatbotInput) chatbotInput.focus();
-                // Update transform when active
-                if (window.innerWidth >= 769) {
-                    // Desktop - Left side
-                    chatbotPopup.style.transform = 'translateX(0) scale(1) translateZ(0)';
-                    chatbotPopup.style.webkitTransform = 'translateX(0) scale(1) translateZ(0)';
-                    chatbotPopup.style.opacity = '1';
-                    chatbotPopup.style.visibility = 'visible';
-                } else {
-                    // Mobile - Full screen slide up
-                    chatbotPopup.style.transform = 'translateY(0) translateZ(0)';
-                    chatbotPopup.style.webkitTransform = 'translateY(0) translateZ(0)';
-                }
+                // Let CSS handle the animation - don't override with inline styles
             } else {
-                // When closing, reset transform
+                // When closing, let CSS handle it
+                // Remove inline styles to let CSS take over
                 if (window.innerWidth >= 769) {
-                    chatbotPopup.style.transform = 'translateX(-20px) scale(0.9) translateZ(0)';
-                    chatbotPopup.style.webkitTransform = 'translateX(-20px) scale(0.9) translateZ(0)';
-                    chatbotPopup.style.opacity = '0';
-                    chatbotPopup.style.visibility = 'hidden';
+                    chatbotPopup.style.transform = '';
+                    chatbotPopup.style.webkitTransform = '';
+                    chatbotPopup.style.opacity = '';
+                    chatbotPopup.style.visibility = '';
                 }
             }
         });
@@ -544,11 +531,14 @@ function copyProductLink(url, event) {
         if (chatbotCloseBtn) {
             chatbotCloseBtn.addEventListener('click', () => {
                 chatbotPopup.classList.remove('active');
+                // Remove inline styles to let CSS handle the closing animation
                 if (window.innerWidth >= 769) {
-                    chatbotPopup.style.transform = 'translateX(-20px) scale(0.9) translateZ(0)';
-                    chatbotPopup.style.webkitTransform = 'translateX(-20px) scale(0.9) translateZ(0)';
-                    chatbotPopup.style.opacity = '0';
-                    chatbotPopup.style.visibility = 'hidden';
+                    setTimeout(() => {
+                        chatbotPopup.style.transform = '';
+                        chatbotPopup.style.webkitTransform = '';
+                        chatbotPopup.style.opacity = '';
+                        chatbotPopup.style.visibility = '';
+                    }, 500);
                 }
             });
         }
