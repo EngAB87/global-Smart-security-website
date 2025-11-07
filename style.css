@@ -811,10 +811,18 @@ box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform 0.5s ease;
     position: absolute;
     top: 0;
     left: 0;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: high-quality;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
 .product-card:hover .product-image img {
