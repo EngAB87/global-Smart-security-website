@@ -604,15 +604,19 @@ header.scrolled .header-social-icon {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
     font-weight: 700;
 }
 
 .btn-primary:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
-    background: white;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    color: var(--primary-color);
+    border-color: white;
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.5);
 }
 
 .btn-primary i {
@@ -658,17 +662,18 @@ header.scrolled .header-social-icon {
 }
 
 .btn-secondary {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
     color: white;
-    border: 2px solid white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
 }
 
 .btn-secondary:hover {
-    background-color: white;
-    color: var(--primary-color);
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.8);
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
 }
 
 .btn-secondary i {
