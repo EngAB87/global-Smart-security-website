@@ -3537,7 +3537,8 @@ footer::after {
         padding: 1.5rem;
     }
 
-/* Chatbot Styles - New Clean Implementation */
+/* Chatbot Styles - REMOVED */
+/* 
 .chatbot-wrapper {
     position: fixed !important;
     bottom: 30px !important;
@@ -3959,14 +3960,13 @@ footer::after {
     }
 }
 
-/* Responsive Chatbot - Left Button, Full Screen on Mobile */
+/* Responsive Chatbot - Hidden on Mobile */
 @media (max-width: 768px) {
     .chatbot-wrapper {
-        bottom: 20px !important;
-        left: 20px !important;
-        transform: translateZ(0) !important;
-        -webkit-transform: translateZ(0) !important;
-        right: auto !important;
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
     }
     
     .chatbot-popup {
@@ -4118,11 +4118,10 @@ footer::after {
 
 @media (max-width: 480px) {
     .chatbot-wrapper {
-        bottom: 15px !important;
-        left: 15px !important;
-        transform: translateZ(0) !important;
-        -webkit-transform: translateZ(0) !important;
-        right: auto !important;
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
     }
     
     .chatbot-popup {

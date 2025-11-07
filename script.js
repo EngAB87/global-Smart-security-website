@@ -454,6 +454,9 @@ function copyProductLink(url) {
             chatbotWrapper.style.zIndex = '999999';
             chatbotWrapper.style.top = 'auto';
             chatbotWrapper.style.right = 'auto';
+            chatbotWrapper.style.display = 'block';
+            chatbotWrapper.style.visibility = 'visible';
+            chatbotWrapper.style.opacity = '1';
             // Desktop - Popup fully centered (middle of screen)
             chatbotPopup.style.position = 'fixed';
             chatbotPopup.style.top = '50%';
@@ -464,29 +467,15 @@ function copyProductLink(url) {
             chatbotPopup.style.right = 'auto';
             chatbotPopup.style.zIndex = '10000000';
         } else {
-            // Mobile - Button on left, Full screen popup
-            chatbotWrapper.style.position = 'fixed';
-            chatbotWrapper.style.bottom = window.innerWidth <= 480 ? '15px' : '20px';
-            chatbotWrapper.style.left = window.innerWidth <= 480 ? '15px' : '20px';
-            chatbotWrapper.style.transform = 'translateZ(0)';
-            chatbotWrapper.style.webkitTransform = 'translateZ(0)';
-            chatbotWrapper.style.zIndex = '999999';
-            chatbotWrapper.style.top = 'auto';
-            chatbotWrapper.style.right = 'auto';
-            // Mobile - Full screen popup
-            chatbotPopup.style.position = 'fixed';
-            chatbotPopup.style.top = '0';
-            chatbotPopup.style.left = '0';
-            chatbotPopup.style.right = '0';
-            chatbotPopup.style.bottom = '0';
-            chatbotPopup.style.width = '100vw';
-            chatbotPopup.style.height = '100vh';
-            chatbotPopup.style.maxWidth = '100vw';
-            chatbotPopup.style.maxHeight = '100vh';
-            chatbotPopup.style.borderRadius = '0';
-            chatbotPopup.style.transform = 'translateY(100%) translateZ(0)';
-            chatbotPopup.style.webkitTransform = 'translateY(100%) translateZ(0)';
-            chatbotPopup.style.zIndex = '10000000';
+            // Mobile - Hidden completely
+            chatbotWrapper.style.display = 'none';
+            chatbotWrapper.style.visibility = 'hidden';
+            chatbotWrapper.style.opacity = '0';
+            chatbotWrapper.style.pointerEvents = 'none';
+            chatbotPopup.style.display = 'none';
+            chatbotPopup.style.visibility = 'hidden';
+            chatbotPopup.style.opacity = '0';
+            chatbotPopup.style.pointerEvents = 'none';
         }
     }
     
