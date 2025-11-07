@@ -32,9 +32,16 @@
     <title>Global Smart Security - أنظمة الأمان والمراقبة المتقدمة</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
+    <!-- Performance: Resource Hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -44,8 +51,37 @@
             document.documentElement.setAttribute('data-theme', currentTheme);
         })();
     </script>
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX', {
+            'anonymize_ip': true,
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+    </script>
+    
+    <!-- Meta Security -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <img src="logo.png" alt="GSS Logo" class="loading-logo-img">
+            </div>
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+            </div>
+            <p class="loading-text">جاري التحميل...</p>
+        </div>
+    </div>
     <!-- Header -->
     <header>
         <nav class="navbar">
@@ -64,10 +100,10 @@
                     
                     <!-- Social Icons -->
                     <div class="header-social">
-                        <a href="https://web.facebook.com/profile.php?id=61583234763935" target="_blank" class="header-social-icon facebook" aria-label="Facebook">
+                        <a href="https://web.facebook.com/profile.php?id=61583234763935" target="_blank" rel="noopener noreferrer" class="header-social-icon facebook" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="https://wa.me/201121153344" target="_blank" class="header-social-icon whatsapp" aria-label="WhatsApp">
+                        <a href="https://wa.me/201121153344" target="_blank" rel="noopener noreferrer" class="header-social-icon whatsapp" aria-label="WhatsApp">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
@@ -95,6 +131,8 @@
                         <li><a href="#accounting">أنظمة الحسابات</a></li>
                         <li><a href="#graphic-design">الجرافيك ديزاينر</a></li>
                         <li><a href="#about">من نحن</a></li>
+                        <li><a href="#testimonials">آراء العملاء</a></li>
+                        <li><a href="#portfolio">مشاريعنا</a></li>
                         <li><a href="#faq">الأسئلة الشائعة</a></li>
                         <li><a href="#contact">تواصل معنا</a></li>
                     </ul>
@@ -553,6 +591,190 @@
         </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="products-section alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <h2>💬 آراء عملائنا</h2>
+                <p>ماذا يقول عملاؤنا عن خدماتنا وجودة عملنا</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>أحمد محمد</h4>
+                            <span class="testimonial-role">مدير شركة تجارية</span>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"خدمة ممتازة واحترافية عالية! فريق العمل متخصص ومهني، والكاميرات بجودة عالية. أنصح الجميع بالتعامل معهم."</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>فاطمة علي</h4>
+                            <span class="testimonial-role">صاحبة محل تجاري</span>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"نظام الكاشير الذي قاموا بتركيبه سهل الاستخدام وساعدني كثيراً في إدارة المحل. شكراً لكم على الخدمة المميزة!"</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>خالد إبراهيم</h4>
+                            <span class="testimonial-role">مدير مصنع</span>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"نظام المراقبة الشامل الذي قاموا بتركيبه في المصنع يوفر لنا أماناً كاملاً. الدعم الفني متواصل والخدمة ممتازة."</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>سارة محمود</h4>
+                            <span class="testimonial-role">مديرة مكتب</span>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"أنظمة المحاسبة التي قدمتها الشركة ساعدتنا كثيراً في تنظيم العمل. فريق محترف وخدمة سريعة."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="products-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>🎯 مشاريعنا</h2>
+                <p>بعض من المشاريع التي نفذناها بنجاح</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-building fa-4x"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>نظام مراقبة لمجمع تجاري</h3>
+                        <p>تركيب 32 كاميرا عالية الدقة مع نظام DVR متقدم</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">كاميرات</span>
+                            <span class="tag">DVR</span>
+                            <span class="tag">مراقبة</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-store fa-4x"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>نظام كاشير لمتجر كبير</h3>
+                        <p>تركيب نظام POS متكامل مع برنامج إدارة المخزون</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">POS</span>
+                            <span class="tag">كاشير</span>
+                            <span class="tag">مخزون</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-industry fa-4x"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>نظام أمان لمصنع</h3>
+                        <p>تركيب نظام مراقبة شامل مع كاميرات PTZ متحركة</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">PTZ</span>
+                            <span class="tag">أمان</span>
+                            <span class="tag">مصنع</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-home fa-4x"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>نظام مراقبة منزلي</h3>
+                        <p>تركيب 8 كاميرات مع نظام مراقبة عن بُعد</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">منزلي</span>
+                            <span class="tag">مراقبة</span>
+                            <span class="tag">أمان</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-calculator fa-4x"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>نظام محاسبة لشركة</h3>
+                        <p>تطبيق نظام محاسبة شامل مع تقارير مالية متقدمة</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">محاسبة</span>
+                            <span class="tag">تقارير</span>
+                            <span class="tag">مالية</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-palette fa-4x"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>هوية بصرية لمطعم</h3>
+                        <p>تصميم هوية بصرية كاملة مع بطاقات وبروشورات</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">تصميم</span>
+                            <span class="tag">هوية</span>
+                            <span class="tag">جرافيك</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FAQ Section -->
     <section id="faq" class="products-section">
         <div class="container">
@@ -645,6 +867,20 @@
                 <p>نسعد بتقديم استشارات مجانية ومعاينة موقعك لتقديم أفضل الحلول الأمنية</p>
             </div>
             <div class="contact-content">
+                <!-- Google Maps -->
+                <div class="contact-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.5!2d31.2357!3d30.0444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAyJzQwLjAiTiAzMcKwMTQnMDguNSJF!5e0!3m2!1sar!2seg!4v1234567890123!5m2!1sar!2seg" 
+                        width="100%" 
+                        height="400" 
+                        style="border:0; border-radius: 15px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="موقع Global Smart Security">
+                    </iframe>
+                </div>
+                
                 <div class="contact-info">
                     <div class="contact-item">
                         <div class="contact-icon">
@@ -689,13 +925,13 @@
                     <div class="social-links">
                         <h3>تواصل معنا عبر</h3>
                         <div class="social-icons">
-                            <a href="https://web.facebook.com/profile.php?id=61583234763935" target="_blank" class="social-icon facebook">
+                            <a href="https://web.facebook.com/profile.php?id=61583234763935" target="_blank" rel="noopener noreferrer" class="social-icon facebook">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="https://wa.me/201121153344" target="_blank" class="social-icon whatsapp">
+                            <a href="https://wa.me/201121153344" target="_blank" rel="noopener noreferrer" class="social-icon whatsapp">
                                 <i class="fab fa-whatsapp"></i>
                             </a>
-                            <a href="https://www.instagram.com/YourPageName" target="_blank" class="social-icon instagram">
+                            <a href="https://www.instagram.com/YourPageName" target="_blank" rel="noopener noreferrer" class="social-icon instagram">
                                 <i class="fab fa-instagram"></i>
                             </a>
                         </div>
@@ -802,7 +1038,7 @@
     </button>
 
     <!-- WhatsApp Quick Button -->
-    <a href="https://wa.me/201121153344" target="_blank" class="whatsapp-float" aria-label="تواصل معنا عبر واتساب">
+    <a href="https://wa.me/201121153344" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="تواصل معنا عبر واتساب">
         <i class="fab fa-whatsapp"></i>
         <span class="whatsapp-tooltip">تواصل معنا</span>
     </a>
