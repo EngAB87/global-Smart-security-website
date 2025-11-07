@@ -164,7 +164,7 @@ contactForm.addEventListener('submit', (e) => {
         window.open(`https://wa.me/201121153344?text=${whatsappMessage}`, '_blank');
         
         // Show success message
-        alert('شكراً لتواصلك معنا! سيتم فتح واتساب لإرسال رسالتك.');
+        showToast('نجح!', 'شكراً لتواصلك معنا! سيتم فتح واتساب لإرسال رسالتك.', 'success');
         
         // Reset form
         contactForm.reset();
@@ -174,6 +174,45 @@ contactForm.addEventListener('submit', (e) => {
         submitBtn.disabled = false;
     }, 1000); // 1 second delay to show loading state
 });
+
+// Toast Notification System
+function showToast(title, message, type = 'success', duration = 3000) {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+    
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    
+    const icons = {
+        success: 'fa-check-circle',
+        error: 'fa-exclamation-circle',
+        warning: 'fa-exclamation-triangle',
+        info: 'fa-info-circle'
+    };
+    
+    toast.innerHTML = `
+        <i class="fas ${icons[type] || icons.success} toast-icon"></i>
+        <div class="toast-content">
+            <div class="toast-title">${title}</div>
+            <div class="toast-message">${message}</div>
+        </div>
+        <button class="toast-close" onclick="this.parentElement.remove()">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
+    
+    container.appendChild(toast);
+    
+    // Auto remove after duration
+    setTimeout(() => {
+        toast.classList.add('hiding');
+        setTimeout(() => {
+            if (toast.parentElement) {
+                toast.remove();
+            }
+        }, 300);
+    }, duration);
+}
 
 // Prevent browser from restoring scroll position
 if ('scrollRestoration' in history) {
