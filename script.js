@@ -429,23 +429,37 @@ function copyProductLink(url) {
 (function() {
     'use strict';
     
-    // Get all chatbot elements
-    const chatbotToggleBtn = document.getElementById('chatbotToggleBtn');
-    const chatbotPopup = document.getElementById('chatbotPopup');
-    const chatbotCloseBtn = document.getElementById('chatbotCloseBtn');
-    const chatbotInput = document.getElementById('chatbotInput');
-    const chatbotSendBtn = document.getElementById('chatbotSendBtn');
-    const chatbotMessages = document.getElementById('chatbotMessages');
-    const chatbotBadge = document.getElementById('chatbotBadge');
-    const chatbotQuickReplies = document.getElementById('chatbotQuickReplies');
-    const chatbotWrapper = document.getElementById('chatbotWrapper');
+    // Initialize chatbot when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initChatbot);
+    } else {
+        initChatbot();
+    }
     
-    if (!chatbotToggleBtn || !chatbotPopup || !chatbotWrapper) return;
-    
-    // Force fixed positioning function - Left Side
-    function ensureFixedPosition() {
-        if (window.innerWidth >= 769) {
-            // Desktop - Toggle Button at bottom left
+    function initChatbot() {
+        // Get all chatbot elements
+        const chatbotToggleBtn = document.getElementById('chatbotToggleBtn');
+        const chatbotPopup = document.getElementById('chatbotPopup');
+        const chatbotCloseBtn = document.getElementById('chatbotCloseBtn');
+        const chatbotInput = document.getElementById('chatbotInput');
+        const chatbotSendBtn = document.getElementById('chatbotSendBtn');
+        const chatbotMessages = document.getElementById('chatbotMessages');
+        const chatbotBadge = document.getElementById('chatbotBadge');
+        const chatbotQuickReplies = document.getElementById('chatbotQuickReplies');
+        const chatbotWrapper = document.getElementById('chatbotWrapper');
+        
+        if (!chatbotToggleBtn || !chatbotPopup || !chatbotWrapper) {
+            console.log('Chatbot elements not found, retrying...');
+            setTimeout(initChatbot, 100);
+            return;
+        }
+        
+        console.log('Chatbot initialized successfully');
+        
+        // Force fixed positioning function - Left Side
+        function ensureFixedPosition() {
+            if (window.innerWidth >= 769) {
+                // Desktop - Toggle Button at bottom left
             chatbotWrapper.style.position = 'fixed';
             chatbotWrapper.style.bottom = '30px';
             chatbotWrapper.style.left = '30px';
@@ -479,44 +493,99 @@ function copyProductLink(url) {
         }
     }
     
-    // Apply on load
-    ensureFixedPosition();
-    
-    // Re-apply on resize
-    window.addEventListener('resize', ensureFixedPosition);
-    
-    // Re-apply on scroll (to prevent any positioning issues)
-    window.addEventListener('scroll', ensureFixedPosition);
-    
-    // Toggle chatbot popup
-    chatbotToggleBtn.addEventListener('click', () => {
-        chatbotPopup.classList.toggle('active');
-        if (chatbotPopup.classList.contains('active')) {
-            if (chatbotBadge) chatbotBadge.style.display = 'none';
-            if (chatbotInput) chatbotInput.focus();
-            // Update transform when active
+        // Force fixed positioning function - Left Side
+        function ensureFixedPosition() {
             if (window.innerWidth >= 769) {
-                // Desktop - Left side
-                chatbotPopup.style.transform = 'translateX(0) scale(1) translateZ(0)';
-                chatbotPopup.style.webkitTransform = 'translateX(0) scale(1) translateZ(0)';
+                // Desktop - Toggle Button at bottom left
+                chatbotWrapper.style.position = 'fixed';
+                chatbotWrapper.style.bottom = '30px';
+                chatbotWrapper.style.left = '30px';
+                chatbotWrapper.style.transform = 'translateZ(0)';
+                chatbotWrapper.style.webkitTransform = 'translateZ(0)';
+                chatbotWrapper.style.zIndex = '999999';
+                chatbotWrapper.style.top = 'auto';
+                chatbotWrapper.style.right = 'auto';
+                chatbotWrapper.style.display = 'block';
+                chatbotWrapper.style.visibility = 'visible';
+                chatbotWrapper.style.opacity = '1';
+                // Desktop - Popup on left side
+                chatbotPopup.style.position = 'fixed';
+                chatbotPopup.style.bottom = '100px';
+                chatbotPopup.style.left = '30px';
+                chatbotPopup.style.transform = 'translateX(-20px) scale(0.9) translateZ(0)';
+                chatbotPopup.style.webkitTransform = 'translateX(-20px) scale(0.9) translateZ(0)';
+                chatbotPopup.style.top = 'auto';
+                chatbotPopup.style.right = 'auto';
+                chatbotPopup.style.zIndex = '10000000';
+                chatbotPopup.style.opacity = '0';
+                chatbotPopup.style.visibility = 'hidden';
             } else {
-                // Mobile - Full screen slide up
-                chatbotPopup.style.transform = 'translateY(0) translateZ(0)';
-                chatbotPopup.style.webkitTransform = 'translateY(0) translateZ(0)';
+                // Mobile - Hidden completely
+                chatbotWrapper.style.display = 'none';
+                chatbotWrapper.style.visibility = 'hidden';
+                chatbotWrapper.style.opacity = '0';
+                chatbotWrapper.style.pointerEvents = 'none';
+                chatbotPopup.style.display = 'none';
+                chatbotPopup.style.visibility = 'hidden';
+                chatbotPopup.style.opacity = '0';
+                chatbotPopup.style.pointerEvents = 'none';
             }
         }
-    });
-    
-    // Close chatbot popup
-    if (chatbotCloseBtn) {
-        chatbotCloseBtn.addEventListener('click', () => {
-            chatbotPopup.classList.remove('active');
+        
+        // Apply on load
+        ensureFixedPosition();
+        
+        // Re-apply on resize
+        window.addEventListener('resize', ensureFixedPosition);
+        
+        // Re-apply on scroll (to prevent any positioning issues)
+        window.addEventListener('scroll', ensureFixedPosition);
+        
+        // Toggle chatbot popup
+        chatbotToggleBtn.addEventListener('click', () => {
+            chatbotPopup.classList.toggle('active');
+            if (chatbotPopup.classList.contains('active')) {
+                if (chatbotBadge) chatbotBadge.style.display = 'none';
+                if (chatbotInput) chatbotInput.focus();
+                // Update transform when active
+                if (window.innerWidth >= 769) {
+                    // Desktop - Left side
+                    chatbotPopup.style.transform = 'translateX(0) scale(1) translateZ(0)';
+                    chatbotPopup.style.webkitTransform = 'translateX(0) scale(1) translateZ(0)';
+                    chatbotPopup.style.opacity = '1';
+                    chatbotPopup.style.visibility = 'visible';
+                } else {
+                    // Mobile - Full screen slide up
+                    chatbotPopup.style.transform = 'translateY(0) translateZ(0)';
+                    chatbotPopup.style.webkitTransform = 'translateY(0) translateZ(0)';
+                }
+            } else {
+                // When closing, reset transform
+                if (window.innerWidth >= 769) {
+                    chatbotPopup.style.transform = 'translateX(-20px) scale(0.9) translateZ(0)';
+                    chatbotPopup.style.webkitTransform = 'translateX(-20px) scale(0.9) translateZ(0)';
+                    chatbotPopup.style.opacity = '0';
+                    chatbotPopup.style.visibility = 'hidden';
+                }
+            }
         });
-    }
-    
-    // Chatbot responses
-    const chatbotResponses = {
-        'خدمات': 'نقدم مجموعة شاملة من الخدمات الأمنية:\n\n📹 كاميرات المراقبة (PTZ، داخلية، خارجية)\n💾 أجهزة DVR & NVR للتسجيل\n💰 أنظمة نقاط البيع (POS)\n📊 أنظمة الحسابات\n🎨 خدمات التصميم الجرافيكي\n\nأي خدمة تريد معرفة المزيد عنها؟',
+        
+        // Close chatbot popup
+        if (chatbotCloseBtn) {
+            chatbotCloseBtn.addEventListener('click', () => {
+                chatbotPopup.classList.remove('active');
+                if (window.innerWidth >= 769) {
+                    chatbotPopup.style.transform = 'translateX(-20px) scale(0.9) translateZ(0)';
+                    chatbotPopup.style.webkitTransform = 'translateX(-20px) scale(0.9) translateZ(0)';
+                    chatbotPopup.style.opacity = '0';
+                    chatbotPopup.style.visibility = 'hidden';
+                }
+            });
+        }
+        
+        // Chatbot responses
+        const chatbotResponses = {
+            'خدمات': 'نقدم مجموعة شاملة من الخدمات الأمنية:\n\n📹 كاميرات المراقبة (PTZ، داخلية، خارجية)\n💾 أجهزة DVR & NVR للتسجيل\n💰 أنظمة نقاط البيع (POS)\n📊 أنظمة الحسابات\n🎨 خدمات التصميم الجرافيكي\n\nأي خدمة تريد معرفة المزيد عنها؟',
         'سعر': 'أسعارنا تنافسية وتختلف حسب المتطلبات. للحصول على عرض سعر دقيق، يرجى التواصل معنا:\n\n📞 الهاتف: +20 112 1153 344\n📧 البريد: info@globalsmartsecurity.com\n💬 واتساب: متاح 24/7\n\nنوفر استشارة مجانية لتقييم احتياجاتك!',
         'كاميرا': 'نوفر أنواع مختلفة من الكاميرات:\n\n🎥 كاميرات PTZ المتحركة - للمساحات الواسعة\n🏠 كاميرات داخلية - للمحلات والمكاتب\n🛡️ كاميرات خارجية - مقاومة للعوامل الجوية\n\nجميع الكاميرات بجودة عالية ودعم رؤية ليلية!',
         'تواصل': 'يمكنك التواصل معنا عبر:\n\n📞 الهاتف: +20 112 1153 344\n📧 البريد: info@globalsmartsecurity.com\n💬 واتساب: اضغط على زر واتساب في الموقع\n🌐 فيسبوك: متاح على صفحتنا\n\nنرد خلال 24 ساعة!',
@@ -525,14 +594,14 @@ function copyProductLink(url) {
         'صيانة': 'نوفر باقات صيانة شاملة:\n\n🔧 صيانة دورية شهرية/ربع سنوية/سنوية\n🔍 فحص شامل للأنظمة\n🧹 تنظيف الكاميرات\n🔄 تحديث البرمجيات\n⚡ إصلاح الأعطال\n\nللمزيد من التفاصيل، تواصل معنا!',
         'كاشير': 'أنظمة الكاشير لدينا تشمل:\n\n💰 نظام POS متكامل\n📊 إدارة المخزون\n💳 دعم البطاقات الائتمانية\n📱 تطبيق موبايل\n📈 تقارير مبيعات\n\nنوفر تدريب كامل على الاستخدام!',
         'محاسبة': 'أنظمة المحاسبة لدينا:\n\n📊 نظام محاسبة شامل\n📈 تقارير مالية متقدمة\n💰 إدارة الفواتير\n👥 إدارة الموظفين والرواتب\n📋 تقارير ضريبية\n\nسهل الاستخدام ومتوافق مع القوانين المصرية!',
-        'default': 'شكراً لسؤالك! يمكنني مساعدتك في:\n\n✅ معلومات عن خدماتنا\n💰 الأسعار والعروض\n📞 طرق التواصل\n📹 أنواع الكاميرات\n💾 أجهزة التسجيل\n🔧 الصيانة والتركيب\n\nاكتب سؤالك أو اختر من الأزرار السريعة!'
-    };
-    
-    // Get bot response
-    function getBotResponse(userMessage) {
-        const message = userMessage.toLowerCase();
+            'default': 'شكراً لسؤالك! يمكنني مساعدتك في:\n\n✅ معلومات عن خدماتنا\n💰 الأسعار والعروض\n📞 طرق التواصل\n📹 أنواع الكاميرات\n💾 أجهزة التسجيل\n🔧 الصيانة والتركيب\n\nاكتب سؤالك أو اختر من الأزرار السريعة!'
+        };
         
-        if (message.includes('خدمات') || message.includes('خدمة') || message.includes('ماذا تقدم')) {
+        // Get bot response
+        function getBotResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            
+            if (message.includes('خدمات') || message.includes('خدمة') || message.includes('ماذا تقدم')) {
             return chatbotResponses['خدمات'];
         } else if (message.includes('سعر') || message.includes('ثمن') || message.includes('تكلفة') || message.includes('كم')) {
             return chatbotResponses['سعر'];
@@ -550,16 +619,16 @@ function copyProductLink(url) {
             return chatbotResponses['كاشير'];
         } else if (message.includes('محاسبة') || message.includes('حسابات') || message.includes('مالي')) {
             return chatbotResponses['محاسبة'];
-        } else {
-            return chatbotResponses['default'];
+            } else {
+                return chatbotResponses['default'];
+            }
         }
-    }
-    
-    // Add message to chat
-    function addMessage(text, isUser = false) {
-        if (!chatbotMessages) return null;
         
-        const messageItem = document.createElement('div');
+        // Add message to chat
+        function addMessage(text, isUser = false) {
+            if (!chatbotMessages) return null;
+            
+            const messageItem = document.createElement('div');
         messageItem.className = `chatbot-message-item ${isUser ? 'chatbot-message-user' : 'chatbot-message-bot'}`;
         
         const avatar = document.createElement('div');
@@ -587,18 +656,18 @@ function copyProductLink(url) {
         // Scroll to bottom
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
         
-        return messageItem;
-    }
-    
-    // Send message
-    function sendMessage() {
-        if (!chatbotInput) return;
+            return messageItem;
+        }
         
-        const message = chatbotInput.value.trim();
-        if (!message) return;
-        
-        // Add user message
-        addMessage(message, true);
+        // Send message
+        function sendMessage() {
+            if (!chatbotInput) return;
+            
+            const message = chatbotInput.value.trim();
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, true);
         chatbotInput.value = '';
         
         // Disable send button
@@ -641,11 +710,11 @@ function copyProductLink(url) {
                     if (chatbotInput) chatbotInput.focus();
                 }
             }, 30);
-        }, 1000);
-    }
-    
-    // Send quick message
-    function sendQuickMessage(message) {
+            }, 1000);
+        }
+        
+        // Send quick message
+        function sendQuickMessage(message) {
         if (chatbotInput) {
             chatbotInput.value = message;
             sendMessage();
