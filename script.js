@@ -17,6 +17,12 @@ window.addEventListener('scroll', () => {
     } else {
         header.classList.remove('scrolled');
     }
+    
+    // Update scroll progress bar
+    const scrollProgress = document.getElementById('scrollProgress');
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (window.scrollY / windowHeight) * 100;
+    scrollProgress.style.width = scrolled + '%';
 });
 
 // Dark Mode Toggle
@@ -224,6 +230,50 @@ window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     if (hero) {
         hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+    }
+});
+
+// Search Toggle
+const searchToggle = document.getElementById('searchToggle');
+const searchBox = document.getElementById('searchBox');
+const searchClose = document.getElementById('searchClose');
+const searchInput = document.getElementById('searchInput');
+
+searchToggle.addEventListener('click', () => {
+    searchBox.classList.add('active');
+    setTimeout(() => {
+        searchInput.focus();
+    }, 100);
+});
+
+searchClose.addEventListener('click', () => {
+    searchBox.classList.remove('active');
+    searchInput.value = '';
+});
+
+// Close search on escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && searchBox.classList.contains('active')) {
+        searchBox.classList.remove('active');
+        searchInput.value = '';
+    }
+});
+
+// Search functionality
+searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        if (searchTerm) {
+            // Simple search - scroll to matching section
+            const sections = document.querySelectorAll('section[id]');
+            sections.forEach(section => {
+                const sectionText = section.textContent.toLowerCase();
+                if (sectionText.includes(searchTerm)) {
+                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    searchBox.classList.remove('active');
+                }
+            });
+        }
     }
 });
 

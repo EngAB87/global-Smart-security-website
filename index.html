@@ -24,6 +24,35 @@
                 </div>
                 
                 <div class="nav-right">
+                    <!-- Phone Number -->
+                    <a href="tel:+201121153344" class="header-phone">
+                        <i class="fas fa-phone-alt"></i>
+                        <span class="phone-text">+20 112 1153 344</span>
+                    </a>
+                    
+                    <!-- Social Icons -->
+                    <div class="header-social">
+                        <a href="https://web.facebook.com/profile.php?id=61583234763935" target="_blank" class="header-social-icon facebook" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://wa.me/201121153344" target="_blank" class="header-social-icon whatsapp" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Search Bar -->
+                    <div class="header-search">
+                        <button class="search-toggle" id="searchToggle" aria-label="البحث">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <div class="search-box" id="searchBox">
+                            <input type="text" id="searchInput" placeholder="ابحث في الموقع...">
+                            <button class="search-close" id="searchClose">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
                     <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع الليلي">
                         <i class="fas fa-moon"></i>
                     </button>
@@ -543,6 +572,15 @@
     <button class="back-to-top" id="backToTop" aria-label="العودة إلى الأعلى">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+    <!-- WhatsApp Quick Button -->
+    <a href="https://wa.me/201121153344" target="_blank" class="whatsapp-float" aria-label="تواصل معنا عبر واتساب">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">تواصل معنا</span>
+    </a>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
 
     <script src="script.js"></script>
 </body>
