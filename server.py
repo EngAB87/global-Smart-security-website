@@ -25,7 +25,7 @@ if __name__ == "__main__":
     socketserver.TCPServer.allow_reuse_address = True
     
     with socketserver.TCPServer((HOST, PORT), MyHTTPRequestHandler) as httpd:
-        print(f"🚀 Global Security Website is running!")
+        print(f"🚀 Global Smart Security Website is running!")
         print(f"📍 Server started at http://{HOST}:{PORT}")
         print(f"📁 Serving files from: {os.getcwd()}")
         print(f"✨ Press Ctrl+C to stop the server")

@@ -1,6 +1,6 @@
-# Global Security Website
+# Global Smart Security Website
 
-موقع ويب احترافي لشركة Global Security المتخصصة في أنظمة الكاميرات وأنظمة الكاشير.
+موقع ويب احترافي لشركة Global Smart Security المتخصصة في أنظمة الكاميرات وأنظمة الكاشير.
 
 ## المميزات
 
@@ -63,7 +63,7 @@
 <p>+20 XXX XXX XXXX</p>
 
 <!-- البريد الإلكتروني -->
-<p>info@globalsecurity.com</p>
+<p>info@globalsmartsecurity.com</p>
 
 <!-- العنوان -->
 <p>القاهرة، مصر</p>
@@ -151,4 +151,4 @@ window.open(`https://wa.me/20XXXXXXXXXX?text=${whatsappMessage}`, '_blank');
 
 ---
 
-© 2025 Global Security. جميع الحقوق محفوظة.
+© 2025 Global Smart Security. جميع الحقوق محفوظة.
