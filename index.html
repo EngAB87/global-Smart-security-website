@@ -1247,6 +1247,18 @@
     }
     </script>
 
+    <!-- Chatbase Integration -->
+    <script>
+        // Chatbase Widget Script (استبدل YOUR_CHATBASE_ID بـ ID الخاص بك)
+        (function() {
+            var chatbaseScript = document.createElement('script');
+            chatbaseScript.src = 'https://www.chatbase.co/embed.min.js';
+            chatbaseScript.setAttribute('chatbot-id', 'YOUR_CHATBASE_ID'); // استبدل هذا
+            chatbaseScript.setAttribute('domain', 'https://www.chatbase.co');
+            chatbaseScript.defer = true;
+            document.head.appendChild(chatbaseScript);
+        })();
+    </script>
 
     <script src="script.js"></script>
 </body>

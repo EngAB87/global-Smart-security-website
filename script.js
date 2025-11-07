@@ -1019,3 +1019,56 @@ if ('IntersectionObserver' in window) {
         });
     });
 }
+
+// Chatbase User Identification
+// يتم استدعاء هذه الدالة عند تسجيل دخول المستخدم
+async function identifyChatbaseUser() {
+    try {
+        // الحصول على token من server
+        const response = await fetch('/api/chatbase/token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // أضف أي headers مطلوبة للـ authentication
+                // 'Authorization': `Bearer ${userToken}`
+            },
+            credentials: 'include' // لإرسال cookies
+        });
+
+        if (!response.ok) {
+            console.error('Failed to get Chatbase token');
+            return;
+        }
+
+        const data = await response.json();
+        const token = data.token;
+
+        // تحديد هوية المستخدم في Chatbase
+        if (window.chatbase) {
+            window.chatbase('identify', { token });
+            console.log('User identified in Chatbase');
+        } else {
+            // انتظر حتى يتم تحميل Chatbase script
+            setTimeout(identifyChatbaseUser, 500);
+        }
+    } catch (error) {
+        console.error('Error identifying user in Chatbase:', error);
+    }
+}
+
+// استدعاء identifyChatbaseUser عند:
+// 1. تحميل الصفحة (إذا كان المستخدم مسجل دخول)
+// 2. بعد تسجيل الدخول
+// 3. عند تحديث session
+
+// مثال: استدعاء عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+    // تحقق إذا كان المستخدم مسجل دخول
+    // const isLoggedIn = checkUserLogin(); // دالة يجب إنشاؤها
+    // if (isLoggedIn) {
+    //     identifyChatbaseUser();
+    // }
+    
+    // للاختبار - يمكنك تفعيل هذا
+    // identifyChatbaseUser();
+});
