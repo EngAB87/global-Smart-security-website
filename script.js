@@ -442,28 +442,28 @@ function copyProductLink(url) {
     
     if (!chatbotToggleBtn || !chatbotPopup || !chatbotWrapper) return;
     
-    // Force fixed positioning function - Centered
+    // Force fixed positioning function - Left Side
     function ensureFixedPosition() {
         if (window.innerWidth >= 769) {
-            // Desktop - Toggle Button at bottom center
+            // Desktop - Toggle Button at bottom left
             chatbotWrapper.style.position = 'fixed';
             chatbotWrapper.style.bottom = '30px';
-            chatbotWrapper.style.left = '50%';
-            chatbotWrapper.style.transform = 'translateX(-50%) translateZ(0)';
-            chatbotWrapper.style.webkitTransform = 'translateX(-50%) translateZ(0)';
+            chatbotWrapper.style.left = '30px';
+            chatbotWrapper.style.transform = 'translateZ(0)';
+            chatbotWrapper.style.webkitTransform = 'translateZ(0)';
             chatbotWrapper.style.zIndex = '999999';
             chatbotWrapper.style.top = 'auto';
             chatbotWrapper.style.right = 'auto';
             chatbotWrapper.style.display = 'block';
             chatbotWrapper.style.visibility = 'visible';
             chatbotWrapper.style.opacity = '1';
-            // Desktop - Popup fully centered (middle of screen)
+            // Desktop - Popup on left side
             chatbotPopup.style.position = 'fixed';
-            chatbotPopup.style.top = '50%';
-            chatbotPopup.style.left = '50%';
-            chatbotPopup.style.transform = 'translate(-50%, -50%) translateY(20px) scale(0.9) translateZ(0)';
-            chatbotPopup.style.webkitTransform = 'translate(-50%, -50%) translateY(20px) scale(0.9) translateZ(0)';
-            chatbotPopup.style.bottom = 'auto';
+            chatbotPopup.style.bottom = '100px';
+            chatbotPopup.style.left = '30px';
+            chatbotPopup.style.transform = 'translateX(-20px) scale(0.9) translateZ(0)';
+            chatbotPopup.style.webkitTransform = 'translateX(-20px) scale(0.9) translateZ(0)';
+            chatbotPopup.style.top = 'auto';
             chatbotPopup.style.right = 'auto';
             chatbotPopup.style.zIndex = '10000000';
         } else {
@@ -496,9 +496,9 @@ function copyProductLink(url) {
             if (chatbotInput) chatbotInput.focus();
             // Update transform when active
             if (window.innerWidth >= 769) {
-                // Desktop - Centered
-                chatbotPopup.style.transform = 'translate(-50%, -50%) translateY(0) scale(1) translateZ(0)';
-                chatbotPopup.style.webkitTransform = 'translate(-50%, -50%) translateY(0) scale(1) translateZ(0)';
+                // Desktop - Left side
+                chatbotPopup.style.transform = 'translateX(0) scale(1) translateZ(0)';
+                chatbotPopup.style.webkitTransform = 'translateX(0) scale(1) translateZ(0)';
             } else {
                 // Mobile - Full screen slide up
                 chatbotPopup.style.transform = 'translateY(0) translateZ(0)';
