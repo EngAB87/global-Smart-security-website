@@ -1,29 +1,36 @@
-// Mobile Menu Toggle
+// Mobile Menu Toggle - Wait for DOM
+document.addEventListener('DOMContentLoaded', () => {
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 const header = document.querySelector('header');
 
+    if (hamburger && navMenu) {
 hamburger.addEventListener('click', () => {
     navMenu.classList.toggle('active');
-    
-    // Animate hamburger
     hamburger.classList.toggle('active');
 });
+    }
 
+    if (header) {
 // Header scroll effect
 window.addEventListener('scroll', () => {
     if (window.scrollY > 100) {
         header.classList.add('scrolled');
     } else {
         header.classList.remove('scrolled');
+            }
+            
+            // Update scroll progress bar
+            const scrollProgress = document.getElementById('scrollProgress');
+            if (scrollProgress) {
+                const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (windowHeight > 0) ? (window.scrollY / windowHeight) * 100 : 0;
+                scrollProgress.style.width = scrolled + '%';
+            }
+        });
     }
-    
-    // Update scroll progress bar
-    const scrollProgress = document.getElementById('scrollProgress');
-    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (window.scrollY / windowHeight) * 100;
-    scrollProgress.style.width = scrolled + '%';
 });
+
 
 // Dark Mode Toggle
 // Initialize theme immediately
@@ -38,13 +45,14 @@ function initDarkMode() {
     const html = document.documentElement;
 const themeToggle = document.getElementById('themeToggle');
     
+    if (!themeToggle) return;
+    
     // Ensure theme is set
     const savedTheme = localStorage.getItem('theme') || 'light';
     html.setAttribute('data-theme', savedTheme);
 
 // Update icon based on theme
 function updateThemeIcon() {
-        if (!themeToggle) return;
     const icon = themeToggle.querySelector('i');
         if (!icon) return;
     if (html.getAttribute('data-theme') === 'dark') {
@@ -58,7 +66,6 @@ function updateThemeIcon() {
 updateThemeIcon();
 
 // Toggle theme
-    if (themeToggle) {
 themeToggle.addEventListener('click', () => {
     const currentTheme = html.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -73,7 +80,6 @@ themeToggle.addEventListener('click', () => {
         themeToggle.style.transform = '';
     }, 300);
 });
-    }
 }
 
 // Initialize when DOM is ready
@@ -84,14 +90,23 @@ if (document.readyState === 'loading') {
 }
 
 // Close mobile menu when clicking on a link
+document.addEventListener('DOMContentLoaded', () => {
+    const navMenu = document.querySelector('.nav-menu');
+    const hamburger = document.querySelector('.hamburger');
+    
+    if (navMenu && hamburger) {
 document.querySelectorAll('.nav-menu a').forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
         hamburger.classList.remove('active');
     });
+        });
+    }
 });
 
-// Smooth Scrolling
+// Smooth Scrolling and Active Navigation - Wait for DOM
+document.addEventListener('DOMContentLoaded', () => {
+    // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -114,7 +129,7 @@ window.addEventListener('scroll', () => {
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 200)) {
+            if (window.scrollY >= (sectionTop - 200)) {
             current = section.getAttribute('id');
         }
     });
@@ -128,11 +143,14 @@ window.addEventListener('scroll', () => {
 
     // Add shadow to navbar on scroll
     const navbar = document.querySelector('header');
+        if (navbar) {
     if (window.scrollY > 100) {
         navbar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
     } else {
         navbar.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
     }
+        }
+    });
 });
 
 // Animate elements on scroll
@@ -181,7 +199,7 @@ function addShareButtonsToProducts() {
             <button class="share-btn" onclick="shareProduct('${productTitle}', '${productUrl}', 'facebook')" title="مشاركة على فيسبوك">
                 <i class="fab fa-facebook-f"></i>
             </button>
-            <button class="share-btn" onclick="copyProductLink('${productUrl}')" title="نسخ الرابط">
+            <button class="share-btn" onclick="copyProductLink('${productUrl}', event)" title="نسخ الرابط">
                 <i class="fas fa-link"></i>
             </button>
         `;
@@ -239,37 +257,18 @@ function copyToClipboard(text, button) {
     }
 }
 
-// Smooth Scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href === '#' || href === '#!') return;
-        
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-            const headerOffset = 100;
-            const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-// Contact Form Handling with Validation
+// Contact Form Handling with Validation - Wait for DOM
+document.addEventListener('DOMContentLoaded', () => {
 const contactForm = document.getElementById('contactForm');
-const submitBtn = document.getElementById('submitBtn');
+    const submitBtn = document.getElementById('submitBtn');
 
-// Character counter for message
-const messageTextarea = document.getElementById('message');
-const charCount = document.getElementById('charCount');
-const charCounter = document.querySelector('.char-counter');
+    // Character counter for message
+    const messageTextarea = document.getElementById('message');
+    const charCount = document.getElementById('charCount');
+    const charCounter = document.querySelector('.char-counter');
 
-if (messageTextarea && charCount) {
+    if (messageTextarea && charCount) {
     messageTextarea.addEventListener('input', () => {
         const length = messageTextarea.value.length;
         charCount.textContent = length;
@@ -282,83 +281,85 @@ if (messageTextarea && charCount) {
             charCounter.classList.add('warning');
         }
     });
-}
+    }
 
-// Form validation
-function validateForm() {
-    let isValid = true;
-    const name = document.getElementById('name');
-    const phone = document.getElementById('phone');
-    const email = document.getElementById('email');
-    const message = document.getElementById('message');
-    
-    // Clear previous errors
-    document.querySelectorAll('.error-message').forEach(error => {
-        error.classList.remove('show');
-        error.textContent = '';
-    });
-    
-    // Validate name
-    if (!name.value.trim() || name.value.trim().length < 2) {
-        showFieldError('nameError', 'الاسم يجب أن يكون على الأقل حرفين');
-        isValid = false;
-    }
-    
-    // Validate phone
-    const phoneRegex = /^(\+20|0)?1[0-9]{9}$/;
-    const cleanPhone = phone.value.replace(/[\s-]/g, '');
-    if (!phone.value.trim() || !phoneRegex.test(cleanPhone)) {
-        showFieldError('phoneError', 'يرجى إدخال رقم هاتف مصري صحيح (مثال: 01123456789)');
-        isValid = false;
-    }
-    
-    // Validate email (if provided)
-    if (email.value.trim()) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email.value)) {
-            showFieldError('emailError', 'يرجى إدخال بريد إلكتروني صحيح');
+    // Form validation
+    function validateForm() {
+        let isValid = true;
+        const name = document.getElementById('name');
+        const phone = document.getElementById('phone');
+        const email = document.getElementById('email');
+        const message = document.getElementById('message');
+        
+        // Clear previous errors
+        document.querySelectorAll('.error-message').forEach(error => {
+            error.classList.remove('show');
+            error.textContent = '';
+        });
+        
+        // Validate name
+        if (!name.value.trim() || name.value.trim().length < 2) {
+            showFieldError('nameError', 'الاسم يجب أن يكون على الأقل حرفين');
             isValid = false;
         }
+        
+        // Validate phone
+        const phoneRegex = /^(\+20|0)?1[0-9]{9}$/;
+        const cleanPhone = phone.value.replace(/[\s-]/g, '');
+        if (!phone.value.trim() || !phoneRegex.test(cleanPhone)) {
+            showFieldError('phoneError', 'يرجى إدخال رقم هاتف مصري صحيح (مثال: 01123456789)');
+            isValid = false;
+        }
+        
+        // Validate email (if provided)
+        if (email.value.trim()) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value)) {
+                showFieldError('emailError', 'يرجى إدخال بريد إلكتروني صحيح');
+                isValid = false;
+            }
+        }
+        
+        // Validate message
+        if (!message.value.trim() || message.value.trim().length < 10) {
+            showFieldError('messageError', 'الرسالة يجب أن تكون على الأقل 10 أحرف');
+            isValid = false;
+        }
+        
+        return isValid;
     }
-    
-    // Validate message
-    if (!message.value.trim() || message.value.trim().length < 10) {
-        showFieldError('messageError', 'الرسالة يجب أن تكون على الأقل 10 أحرف');
-        isValid = false;
-    }
-    
-    return isValid;
-}
 
-function showFieldError(errorId, message) {
-    const errorElement = document.getElementById(errorId);
-    if (errorElement) {
-        errorElement.textContent = message;
-        errorElement.classList.add('show');
+    function showFieldError(errorId, message) {
+        const errorElement = document.getElementById(errorId);
+        if (errorElement) {
+            errorElement.textContent = message;
+            errorElement.classList.add('show');
+        }
     }
-}
 
-if (contactForm) {
+    if (contactForm) {
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
-        // Validate form
-        if (!validateForm()) {
-            showToast('خطأ في التحقق', 'يرجى تصحيح الأخطاء في النموذج', 'error');
-            return;
-        }
-        
-        const name = document.getElementById('name').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const message = document.getElementById('message').value.trim();
-        
-        // Show loading state
-        submitBtn.classList.add('loading');
-        submitBtn.disabled = true;
-        
-        // Simulate processing delay
-        setTimeout(() => {
+            // Validate form
+            if (!validateForm()) {
+                showToast('خطأ في التحقق', 'يرجى تصحيح الأخطاء في النموذج', 'error');
+                return;
+            }
+            
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            // Show loading state
+            if (submitBtn) {
+                submitBtn.classList.add('loading');
+                submitBtn.disabled = true;
+            }
+            
+            // Simulate processing delay
+            setTimeout(() => {
     // Create WhatsApp message
     const whatsappMessage = `مرحباً، أنا ${name}%0A` +
                            `رقم الهاتف: ${phone}%0A` +
@@ -369,40 +370,43 @@ contactForm.addEventListener('submit', (e) => {
     window.open(`https://wa.me/201121153344?text=${whatsappMessage}`, '_blank');
     
     // Show success message
-            showToast('نجح!', 'شكراً لتواصلك معنا! سيتم فتح واتساب لإرسال رسالتك.', 'success');
+                showToast('نجح!', 'شكراً لتواصلك معنا! سيتم فتح واتساب لإرسال رسالتك.', 'success');
     
     // Reset form
     contactForm.reset();
-            charCount.textContent = '0';
-            charCounter.classList.remove('warning', 'error');
-            document.querySelectorAll('.error-message').forEach(error => {
-                error.classList.remove('show');
-            });
-            
-            // Remove loading state
-            submitBtn.classList.remove('loading');
-            submitBtn.disabled = false;
-        }, 1000);
-    });
-    
-    // Real-time validation
-    const inputs = contactForm.querySelectorAll('input, textarea');
-    inputs.forEach(input => {
-        input.addEventListener('blur', () => {
-            if (input.value.trim()) {
-                validateForm();
-            }
+                if (charCount) charCount.textContent = '0';
+                if (charCounter) charCounter.classList.remove('warning', 'error');
+                document.querySelectorAll('.error-message').forEach(error => {
+                    error.classList.remove('show');
+                });
+                
+                // Remove loading state
+                if (submitBtn) {
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
+                }
+            }, 1000);
         });
         
-        input.addEventListener('input', () => {
-            const errorId = input.id + 'Error';
-            const errorElement = document.getElementById(errorId);
-            if (errorElement && input.validity.valid) {
-                errorElement.classList.remove('show');
-            }
+        // Real-time validation
+        const inputs = contactForm.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => {
+                if (input.value.trim()) {
+                    validateForm();
+                }
+            });
+            
+            input.addEventListener('input', () => {
+                const errorId = input.id + 'Error';
+                const errorElement = document.getElementById(errorId);
+                if (errorElement && input.validity.valid) {
+                    errorElement.classList.remove('show');
+                }
+            });
         });
-    });
-}
+    }
+});
 
 // Share Product Function
 function shareProduct(productName, url, platform = 'whatsapp') {
@@ -420,9 +424,12 @@ function shareProduct(productName, url, platform = 'whatsapp') {
 }
 
 // Copy Product Link
-function copyProductLink(url) {
+function copyProductLink(url, event) {
+    if (!event) return;
     const button = event.target.closest('.share-btn');
-    copyToClipboard(url, button);
+    if (button) {
+        copyToClipboard(url, button);
+    }
 }
 
 // Chatbot Functionality - New Clean Implementation
@@ -456,43 +463,6 @@ function copyProductLink(url) {
         
         console.log('Chatbot initialized successfully');
         
-        // Force fixed positioning function - Left Side
-        function ensureFixedPosition() {
-            if (window.innerWidth >= 769) {
-                // Desktop - Toggle Button at bottom left
-            chatbotWrapper.style.position = 'fixed';
-            chatbotWrapper.style.bottom = '30px';
-            chatbotWrapper.style.left = '30px';
-            chatbotWrapper.style.transform = 'translateZ(0)';
-            chatbotWrapper.style.webkitTransform = 'translateZ(0)';
-            chatbotWrapper.style.zIndex = '999999';
-            chatbotWrapper.style.top = 'auto';
-            chatbotWrapper.style.right = 'auto';
-            chatbotWrapper.style.display = 'block';
-            chatbotWrapper.style.visibility = 'visible';
-            chatbotWrapper.style.opacity = '1';
-            // Desktop - Popup on left side
-            chatbotPopup.style.position = 'fixed';
-            chatbotPopup.style.bottom = '100px';
-            chatbotPopup.style.left = '30px';
-            chatbotPopup.style.transform = 'translateX(-20px) scale(0.9) translateZ(0)';
-            chatbotPopup.style.webkitTransform = 'translateX(-20px) scale(0.9) translateZ(0)';
-            chatbotPopup.style.top = 'auto';
-            chatbotPopup.style.right = 'auto';
-            chatbotPopup.style.zIndex = '10000000';
-        } else {
-            // Mobile - Hidden completely
-            chatbotWrapper.style.display = 'none';
-            chatbotWrapper.style.visibility = 'hidden';
-            chatbotWrapper.style.opacity = '0';
-            chatbotWrapper.style.pointerEvents = 'none';
-            chatbotPopup.style.display = 'none';
-            chatbotPopup.style.visibility = 'hidden';
-            chatbotPopup.style.opacity = '0';
-            chatbotPopup.style.pointerEvents = 'none';
-        }
-    }
-    
         // Force fixed positioning function - Left Side
         function ensureFixedPosition() {
             if (window.innerWidth >= 769) {
@@ -715,55 +685,56 @@ function copyProductLink(url) {
         
         // Send quick message
         function sendQuickMessage(message) {
-        if (chatbotInput) {
-            chatbotInput.value = message;
-            sendMessage();
-        }
-    }
-    
-    // Setup event listeners
-    if (chatbotSendBtn) {
-        chatbotSendBtn.addEventListener('click', sendMessage);
-    }
-    
-    if (chatbotInput) {
-        chatbotInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
+            if (chatbotInput) {
+                chatbotInput.value = message;
                 sendMessage();
             }
-        });
+        }
         
-        chatbotInput.addEventListener('input', () => {
-            if (chatbotSendBtn) {
-                chatbotSendBtn.disabled = !chatbotInput.value.trim();
-            }
-        });
-    }
-    
-    // Quick reply buttons
-    if (chatbotQuickReplies) {
-        const quickReplyButtons = chatbotQuickReplies.querySelectorAll('.chatbot-quick-reply');
-        quickReplyButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const message = button.getAttribute('data-message');
-                if (message) {
-                    sendQuickMessage(message);
+        // Setup event listeners
+        if (chatbotSendBtn) {
+            chatbotSendBtn.addEventListener('click', sendMessage);
+        }
+        
+        if (chatbotInput) {
+            chatbotInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
                 }
             });
-        });
-    }
-    
-    // Hide badge after first interaction
-    let badgeHidden = false;
-    if (chatbotMessages && chatbotBadge) {
-        const observer = new MutationObserver(() => {
-            if (!badgeHidden && chatbotMessages.children.length > 1) {
-                badgeHidden = true;
-                chatbotBadge.style.display = 'none';
-            }
-        });
-        observer.observe(chatbotMessages, { childList: true });
+            
+            chatbotInput.addEventListener('input', () => {
+                if (chatbotSendBtn) {
+                    chatbotSendBtn.disabled = !chatbotInput.value.trim();
+                }
+            });
+        }
+        
+        // Quick reply buttons
+        if (chatbotQuickReplies) {
+            const quickReplyButtons = chatbotQuickReplies.querySelectorAll('.chatbot-quick-reply');
+            quickReplyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const message = button.getAttribute('data-message');
+                    if (message) {
+                        sendQuickMessage(message);
+                    }
+                });
+            });
+        }
+        
+        // Hide badge after first interaction
+        let badgeHidden = false;
+        if (chatbotMessages && chatbotBadge) {
+            const observer = new MutationObserver(() => {
+                if (!badgeHidden && chatbotMessages.children.length > 1) {
+                    badgeHidden = true;
+                    chatbotBadge.style.display = 'none';
+                }
+            });
+            observer.observe(chatbotMessages, { childList: true });
+        }
     }
 })();
 
@@ -1043,14 +1014,18 @@ if ('IntersectionObserver' in window) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
+                if (img.dataset.src) {
                 img.src = img.dataset.src;
                 img.classList.add('loaded');
                 observer.unobserve(img);
+                }
             }
         });
     });
 
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
     });
 }
