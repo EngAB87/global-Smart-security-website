@@ -442,18 +442,41 @@ function copyProductLink(url) {
     
     if (!chatbotToggleBtn || !chatbotPopup || !chatbotWrapper) return;
     
-    // Force fixed positioning function
+    // Force fixed positioning function - Centered
     function ensureFixedPosition() {
         if (window.innerWidth >= 769) {
+            // Desktop - Centered
             chatbotWrapper.style.position = 'fixed';
             chatbotWrapper.style.bottom = '30px';
-            chatbotWrapper.style.left = '30px';
+            chatbotWrapper.style.left = '50%';
+            chatbotWrapper.style.transform = 'translateX(-50%) translateZ(0)';
+            chatbotWrapper.style.webkitTransform = 'translateX(-50%) translateZ(0)';
             chatbotWrapper.style.zIndex = '999999';
             chatbotWrapper.style.top = 'auto';
             chatbotWrapper.style.right = 'auto';
             chatbotPopup.style.position = 'fixed';
             chatbotPopup.style.bottom = '120px';
-            chatbotPopup.style.left = '30px';
+            chatbotPopup.style.left = '50%';
+            chatbotPopup.style.transform = 'translateX(-50%) translateY(20px) scale(0.9) translateZ(0)';
+            chatbotPopup.style.webkitTransform = 'translateX(-50%) translateY(20px) scale(0.9) translateZ(0)';
+            chatbotPopup.style.zIndex = '10000000';
+            chatbotPopup.style.top = 'auto';
+            chatbotPopup.style.right = 'auto';
+        } else {
+            // Mobile - Centered
+            chatbotWrapper.style.position = 'fixed';
+            chatbotWrapper.style.bottom = window.innerWidth <= 480 ? '15px' : '20px';
+            chatbotWrapper.style.left = '50%';
+            chatbotWrapper.style.transform = 'translateX(-50%) translateZ(0)';
+            chatbotWrapper.style.webkitTransform = 'translateX(-50%) translateZ(0)';
+            chatbotWrapper.style.zIndex = '999999';
+            chatbotWrapper.style.top = 'auto';
+            chatbotWrapper.style.right = 'auto';
+            chatbotPopup.style.position = 'fixed';
+            chatbotPopup.style.bottom = window.innerWidth <= 480 ? '75px' : '90px';
+            chatbotPopup.style.left = '50%';
+            chatbotPopup.style.transform = 'translateX(-50%) translateY(20px) scale(0.9) translateZ(0)';
+            chatbotPopup.style.webkitTransform = 'translateX(-50%) translateY(20px) scale(0.9) translateZ(0)';
             chatbotPopup.style.zIndex = '10000000';
             chatbotPopup.style.top = 'auto';
             chatbotPopup.style.right = 'auto';
@@ -475,6 +498,8 @@ function copyProductLink(url) {
         if (chatbotPopup.classList.contains('active')) {
             if (chatbotBadge) chatbotBadge.style.display = 'none';
             if (chatbotInput) chatbotInput.focus();
+            // Update transform when active
+            ensureFixedPosition();
         }
     });
     

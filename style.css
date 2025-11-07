@@ -3959,20 +3959,31 @@ footer::after {
     }
 }
 
-/* Responsive Chatbot */
+/* Responsive Chatbot - Centered on Mobile */
 @media (max-width: 768px) {
     .chatbot-wrapper {
-        bottom: 20px;
-        left: 20px;
+        bottom: 20px !important;
+        left: 50% !important;
+        transform: translateX(-50%) translateZ(0) !important;
+        -webkit-transform: translateX(-50%) translateZ(0) !important;
+        right: auto !important;
     }
     
     .chatbot-popup {
-        position: fixed;
-        bottom: 90px;
-        left: 20px;
+        position: fixed !important;
+        bottom: 90px !important;
+        left: 50% !important;
+        transform: translateX(-50%) translateY(20px) scale(0.9) translateZ(0) !important;
+        -webkit-transform: translateX(-50%) translateY(20px) scale(0.9) translateZ(0) !important;
+        right: auto !important;
         width: calc(100vw - 2rem);
         max-width: 380px;
         height: 500px;
+    }
+    
+    .chatbot-popup.active {
+        transform: translateX(-50%) translateY(0) scale(1) translateZ(0) !important;
+        -webkit-transform: translateX(-50%) translateY(0) scale(1) translateZ(0) !important;
     }
     
     .chatbot-toggle-btn {
@@ -3984,16 +3995,27 @@ footer::after {
 
 @media (max-width: 480px) {
     .chatbot-wrapper {
-        bottom: 15px;
-        left: 15px;
+        bottom: 15px !important;
+        left: 50% !important;
+        transform: translateX(-50%) translateZ(0) !important;
+        -webkit-transform: translateX(-50%) translateZ(0) !important;
+        right: auto !important;
     }
     
     .chatbot-popup {
-        position: fixed;
-        bottom: 75px;
-        left: 15px;
+        position: fixed !important;
+        bottom: 75px !important;
+        left: 50% !important;
+        transform: translateX(-50%) translateY(20px) scale(0.9) translateZ(0) !important;
+        -webkit-transform: translateX(-50%) translateY(20px) scale(0.9) translateZ(0) !important;
+        right: auto !important;
         width: calc(100vw - 1rem);
         height: 450px;
+    }
+    
+    .chatbot-popup.active {
+        transform: translateX(-50%) translateY(0) scale(1) translateZ(0) !important;
+        -webkit-transform: translateX(-50%) translateY(0) scale(1) translateZ(0) !important;
     }
     
     .chatbot-popup-messages {
@@ -4005,13 +4027,16 @@ footer::after {
     }
 }
 
-/* Desktop Chatbot - Completely Different Design */
+/* Desktop Chatbot - Centered Design */
 @media (min-width: 769px) {
-    /* Ensure chatbot is above all other elements */
+    /* Ensure chatbot is above all other elements - Centered */
     .chatbot-wrapper {
         position: fixed !important;
         bottom: 30px !important;
-        left: 30px !important;
+        left: 50% !important;
+        transform: translateX(-50%) translateZ(0) !important;
+        -webkit-transform: translateX(-50%) translateZ(0) !important;
+        right: auto !important;
         z-index: 999999 !important;
         pointer-events: none !important;
         isolation: isolate;
@@ -4042,11 +4067,14 @@ footer::after {
         border-color: rgba(255, 255, 255, 0.5);
     }
     
-    /* Desktop Popup - Side Panel Style */
+    /* Desktop Popup - Centered Style */
     .chatbot-popup {
         position: fixed !important;
         bottom: 120px !important;
-        left: 30px !important;
+        left: 50% !important;
+        transform: translateX(-50%) translateY(20px) scale(0.9) translateZ(0) !important;
+        -webkit-transform: translateX(-50%) translateY(20px) scale(0.9) translateZ(0) !important;
+        right: auto !important;
         width: 420px !important;
         height: 650px !important;
         max-height: calc(100vh - 150px) !important;
@@ -4058,8 +4086,6 @@ footer::after {
         -webkit-backdrop-filter: blur(20px) !important;
         pointer-events: none !important;
         isolation: isolate;
-        transform: translateY(20px) scale(0.9) translateZ(0) !important;
-        -webkit-transform: translateY(20px) scale(0.9) translateZ(0) !important;
         will-change: transform, opacity;
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
@@ -4068,8 +4094,8 @@ footer::after {
     .chatbot-popup.active {
         opacity: 1 !important;
         visibility: visible !important;
-        transform: translateX(0) scale(1) translateZ(0) !important;
-        -webkit-transform: translateX(0) scale(1) translateZ(0) !important;
+        transform: translateX(-50%) translateY(0) scale(1) translateZ(0) !important;
+        -webkit-transform: translateX(-50%) translateY(0) scale(1) translateZ(0) !important;
         pointer-events: auto !important;
         animation: desktopChatbotSlideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
     }
@@ -4077,11 +4103,11 @@ footer::after {
     @keyframes desktopChatbotSlideIn {
         from {
             opacity: 0;
-            transform: translateX(-50px) scale(0.9);
+            transform: translateX(-50%) translateY(20px) scale(0.9);
         }
         to {
             opacity: 1;
-            transform: translateX(0) scale(1);
+            transform: translateX(-50%) translateY(0) scale(1);
         }
     }
     
