@@ -302,15 +302,15 @@ header {
 
 header.scrolled {
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
-    padding: 0.8rem 0;
+    padding: 0.5rem 0;
 }
 
 header.scrolled .logo-img {
-    height: 45px;
+    height: 40px;
 }
 
 header.scrolled .logo-text {
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 header.scrolled .nav-menu a {
@@ -330,7 +330,7 @@ header.scrolled .header-social-icon {
 }
 
 .navbar {
-    padding: 1.1rem 0;
+    padding: 0.7rem 0;
 }
 
 .navbar .container {
@@ -339,10 +339,10 @@ header.scrolled .header-social-icon {
     align-items: center;
     width: 100%;
     box-sizing: border-box;
-    gap: 0.8rem;
-    max-width: 1400px;
+    gap: 1.5rem;
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 25px;
 }
 
 .nav-right {
@@ -356,13 +356,13 @@ header.scrolled .header-social-icon {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem 1rem;
+    padding: 0.4rem 0.9rem;
     background: rgba(37, 99, 235, 0.1);
     border-radius: 25px;
     text-decoration: none;
     color: var(--text-color);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     transition: all 0.3s ease;
     white-space: nowrap;
 }
@@ -399,14 +399,14 @@ header.scrolled .header-social-icon {
 }
 
 .header-social-icon {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 1rem;
+    font-size: 0.95rem;
     text-decoration: none;
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -431,8 +431,8 @@ header.scrolled .header-social-icon {
 }
 
 .search-toggle {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background: rgba(37, 99, 235, 0.1);
     border: none;
@@ -518,7 +518,7 @@ header.scrolled .header-social-icon {
 
 .logo-text {
     white-space: nowrap;
-    font-size: 1.15rem;
+    font-size: 1rem;
     font-weight: 700;
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     -webkit-background-clip: text;
@@ -531,7 +531,7 @@ header.scrolled .header-social-icon {
 }
 
 .logo-img {
-    height: 50px;
+    height: 45px;
     width: auto;
     object-fit: contain;
     transition: transform 0.3s ease;
@@ -546,13 +546,13 @@ header.scrolled .header-social-icon {
 /* Theme Toggle Button */
 .theme-toggle {
     position: relative;
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: var(--gradient-primary);
     border: none;
     color: white;
-    font-size: 1.1rem;
+    font-size: 1rem;
     cursor: pointer;
     box-shadow: 0 3px 15px rgba(37, 99, 235, 0.3);
     transition: all 0.3s ease;
@@ -584,8 +584,12 @@ header.scrolled .header-social-icon {
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 0.2rem;
+    gap: 0.5rem;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex: 1;
+    margin: 0 1rem;
 }
 
 .nav-menu a {
@@ -594,10 +598,11 @@ header.scrolled .header-social-icon {
     font-weight: 600;
     font-size: 0.9rem;
     transition: all 0.3s ease;
-    padding: 0.6rem 0.9rem;
+    padding: 0.6rem 1rem;
     border-radius: 8px;
     position: relative;
     white-space: nowrap;
+    display: inline-block;
 }
 
 .nav-menu a::before {
@@ -659,7 +664,7 @@ header.scrolled .header-social-icon {
     background: var(--gradient-hero);
     color: white;
     text-align: center;
-    margin-top: 70px;
+    margin-top: 60px;
     overflow: hidden;
     width: 100%;
     max-width: 100vw;
@@ -709,6 +714,7 @@ header.scrolled .header-social-icon {
     padding: 2rem;
     width: 100%;
     box-sizing: border-box;
+    margin-top: 2rem;
 }
 
 .hero-header {
@@ -717,22 +723,24 @@ header.scrolled .header-social-icon {
     justify-content: center;
     gap: 1.5rem;
     margin-bottom: 1.5rem;
+    margin-top: 1rem;
     flex-wrap: wrap;
     animation: fadeInUp 1s ease;
-    padding: 1rem;
+    padding: 1.5rem;
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .hero-logo {
-    height: 100px;
+    height: 120px;
     width: auto;
     object-fit: contain;
-    filter: drop-shadow(0 6px 20px rgba(255, 255, 255, 0.3));
+    filter: drop-shadow(0 8px 25px rgba(255, 255, 255, 0.5)) brightness(1.1) contrast(1.1);
     animation: fadeInUp 1s ease, float 3s ease-in-out infinite;
     transition: transform 0.3s ease;
+    margin-bottom: 0.5rem;
 }
 
 .hero-logo:hover {
@@ -2474,6 +2482,30 @@ footer::after {
     background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
 }
 
+[data-theme="dark"] .footer-logo-section {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 2px solid rgba(16, 185, 129, 0.4) !important;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+}
+
+[data-theme="dark"] .footer-logo-section:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(16, 185, 129, 0.6) !important;
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.5) !important;
+}
+
+[data-theme="dark"] .footer-logo {
+    filter: drop-shadow(0 6px 20px rgba(16, 185, 129, 0.8)) brightness(1.3) contrast(1.2);
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(16, 185, 129, 0.3);
+}
+
+[data-theme="dark"] .footer-logo:hover {
+    filter: drop-shadow(0 8px 25px rgba(16, 185, 129, 1)) brightness(1.4) contrast(1.3);
+    border-color: rgba(16, 185, 129, 0.6);
+    background: rgba(255, 255, 255, 0.15);
+}
+
 .footer-content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -2484,16 +2516,17 @@ footer::after {
 .footer-logo-section {
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1.5rem;
     margin-bottom: 1.8rem;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(16, 185, 129, 0.1);
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(16, 185, 129, 0.3) !important;
     transition: all 0.4s ease;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.2);
 }
 
 .footer-logo-section::before {
@@ -2512,25 +2545,32 @@ footer::after {
 }
 
 .footer-logo-section:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(16, 185, 129, 0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(16, 185, 129, 0.5) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4) !important;
 }
 
 .footer-logo {
-    height: 55px;
+    height: 70px !important;
     width: auto;
     object-fit: contain;
-    filter: drop-shadow(0 4px 15px rgba(16, 185, 129, 0.4));
+    filter: drop-shadow(0 6px 20px rgba(16, 185, 129, 0.6)) brightness(1.1) contrast(1.1);
     transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     position: relative;
     z-index: 1;
+    opacity: 1 !important;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem;
+    border-radius: 12px;
+    border: 2px solid rgba(16, 185, 129, 0.2);
 }
 
 .footer-logo:hover {
-    transform: scale(1.15) rotate(10deg);
-    filter: drop-shadow(0 6px 20px rgba(16, 185, 129, 0.6));
+    transform: scale(1.2) rotate(10deg);
+    filter: drop-shadow(0 8px 25px rgba(16, 185, 129, 0.8)) brightness(1.2) contrast(1.2);
+    border-color: rgba(16, 185, 129, 0.5);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .footer-title-wrapper {
@@ -3755,6 +3795,8 @@ footer::after {
         display: flex;
         transform: translateX(100%);
         z-index: 1000;
+        gap: 1rem;
+        margin: 0;
     }
 
     .nav-menu.active {
@@ -3764,7 +3806,7 @@ footer::after {
     .nav-menu a {
         font-size: 1.3rem;
         margin: 0.8rem 0;
-        padding: 0.8rem 1.5rem;
+        padding: 1rem 2rem;
         width: 90%;
         text-align: center;
     }
@@ -3797,11 +3839,14 @@ footer::after {
 
     .hero-content {
         padding: 1.5rem;
+        margin-top: 1rem;
     }
 
     .hero-header {
         gap: 1rem;
         margin-bottom: 1rem;
+        margin-top: 0.5rem;
+        padding: 1.2rem;
     }
 
     .hero-title {
@@ -3810,7 +3855,8 @@ footer::after {
     }
 
     .hero-logo {
-        height: 70px;
+        height: 80px;
+        margin-bottom: 0.3rem;
     }
 
     .hero-subtitle {
