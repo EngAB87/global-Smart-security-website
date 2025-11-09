@@ -3805,98 +3805,78 @@ footer::after {
     .whatsapp-tooltip {
         display: none;
     }
-
+    
+    /* Hide nav menu by default on mobile - show hamburger instead */
     .nav-menu {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: 100vh;
-        height: 100dvh; /* Dynamic viewport height for mobile browsers */
-        background-color: var(--bg-color);
-        -webkit-flex-direction: column;
-        -moz-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        -webkit-align-items: center;
-        -moz-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-        -webkit-justify-content: center;
-        -moz-justify-content: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        -webkit-transition: -webkit-transform 0.5s ease-in-out;
-        -moz-transition: -moz-transform 0.5s ease-in-out;
-        -o-transition: -o-transform 0.5s ease-in-out;
-        transition: transform 0.5s ease-in-out;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-transform: translateX(100%);
-        -moz-transform: translateX(100%);
-        -ms-transform: translateX(100%);
-        transform: translateX(100%);
-        z-index: 1000;
-        -webkit-overflow-scrolling: touch;
-        padding: 2rem 0;
-        gap: 0.5rem;
+        display: none !important;
     }
-
+    
     .nav-menu.active {
-        -webkit-transform: translateX(0);
-        -moz-transform: translateX(0);
-        -ms-transform: translateX(0);
-        transform: translateX(0);
+        display: flex !important;
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        background-color: var(--bg-color) !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out !important;
+        transform: translateX(0) !important;
+        z-index: 1000 !important;
+        -webkit-overflow-scrolling: touch;
+        padding: 2rem 0 !important;
+        gap: 0.5rem !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+    
+    /* Hide nav menu when not active */
+    .nav-menu:not(.active) {
+        display: none !important;
     }
 
-    .nav-menu a {
+    .nav-menu.active a {
         font-size: 1rem;
         margin: 0;
         padding: 1rem 1.5rem;
         width: 80%;
         max-width: 280px;
         text-align: center;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
         border-radius: 10px;
         background: transparent;
         color: rgba(255, 255, 255, 0.95);
         font-weight: 500;
-        -webkit-transition: all 0.3s ease;
-        -moz-transition: all 0.3s ease;
-        -o-transition: all 0.3s ease;
         transition: all 0.3s ease;
         border: none;
         display: block;
     }
     
-    .nav-menu a:hover {
+    .nav-menu.active a:hover {
         background: rgba(255, 255, 255, 0.08);
         color: #ffffff;
     }
 
-    .nav-menu a.active {
+    .nav-menu.active a.active {
         background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%) !important;
         color: white !important;
         font-weight: 600;
         box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
-        -webkit-box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
-        -moz-box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
         transform: scale(1.02);
     }
     
-    [data-theme="dark"] .nav-menu {
-        background-color: rgba(15, 23, 42, 0.98);
+    [data-theme="dark"] .nav-menu.active {
+        background-color: rgba(15, 23, 42, 0.98) !important;
     }
     
-    [data-theme="dark"] .nav-menu a {
+    [data-theme="dark"] .nav-menu.active a {
         color: rgba(255, 255, 255, 0.95);
     }
     
-    [data-theme="dark"] .nav-menu a.active {
+    [data-theme="dark"] .nav-menu.active a.active {
         background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%) !important;
         box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
     }
