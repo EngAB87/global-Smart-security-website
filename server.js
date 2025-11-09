@@ -12,8 +12,9 @@ const PORT = 3001; // أو أي port تريده
 app.use(cors());
 app.use(express.json());
 
-// Secret key من Chatbase (يجب حفظه في .env)
-const CHATBOT_IDENTITY_SECRET = process.env.CHATBOT_IDENTITY_SECRET;
+// Secret key من Chatbase (يجب حفظه في .env كـ secret)
+// Your chatbase secret key (should be stored as a secret not in the code)
+const secret = process.env.CHATBOT_IDENTITY_SECRET;
 
 // API endpoint للحصول على token
 app.post('/api/chatbase/token', async (req, res) => {
@@ -29,12 +30,12 @@ app.post('/api/chatbase/token', async (req, res) => {
         // إنشاء JWT token
         const token = jwt.sign(
             { 
-                user_id: user.id,
-                email: user.email,
-                stripe_accounts: user.stripe_accounts || [],
-                // ... إضافة أي attributes أخرى تريدها
+                user_id: user.id, // Your user's id
+                email: user.email, // User's email
+                stripe_accounts: user.stripe_accounts || [], // User's stripe accounts for stripe integration
+                // ... other custom attributes
             }, 
-            CHATBOT_IDENTITY_SECRET, 
+            secret, 
             { expiresIn: '1h' }
         );
 
@@ -46,12 +47,14 @@ app.post('/api/chatbase/token', async (req, res) => {
 });
 
 // دالة للحصول على المستخدم (يجب تعديلها حسب نظامك)
+// Get the current user signed in to your site
 async function getSignedInUser(req) {
     // مثال: من session أو JWT token في header
     // const sessionToken = req.headers.authorization;
     // return await getUserFromSession(sessionToken);
     
-    // للاختبار فقط - يجب حذف هذا
+    // للاختبار فقط - يجب حذف هذا واستبداله بدالة حقيقية
+    // TODO: استبدل هذا بمنطق حقيقي للحصول على المستخدم المسجل دخول
     return {
         id: 'user123',
         email: 'user@example.com',

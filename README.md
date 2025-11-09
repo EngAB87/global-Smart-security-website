@@ -164,7 +164,7 @@ window.open(`https://wa.me/20XXXXXXXXXX?text=${whatsappMessage}`, '_blank');
 - `style.css` - ملف التنسيقات الكامل (5707 سطر)
 - `script.js` - ملف البرمجة والتفاعل (1075 سطر)
 - `server.py` - خادم Python للتطوير المحلي
-- `server.js` - خادم Node.js (لـ Chatbase integration)
+- `server.js` - خادم Node.js (اختياري - للاستخدامات المستقبلية)
 
 ### صفحات إضافية:
 - `404.html` - صفحة خطأ 404 مخصصة
@@ -188,7 +188,7 @@ window.open(`https://wa.me/20XXXXXXXXXX?text=${whatsappMessage}`, '_blank');
 - **Font Awesome 6.4.0** - للأيقونات
 - **Google Fonts** - خطوط Cairo, Almarai, Poppins
 - **Google Analytics 4** - تحليلات الموقع (يحتاج تحديث ID)
-- **Chatbase** - شات بوت ذكي (اختياري - يحتاج إعداد)
+- **Tawk.to** - خدمة دردشة مباشرة مجانية
 
 ### التقنيات المستخدمة:
 - HTML5 مع Semantic Elements
@@ -247,7 +247,7 @@ window.open(`https://wa.me/20XXXXXXXXXX?text=${whatsappMessage}`, '_blank');
 - روابط السوشيال ميديا (Facebook, WhatsApp)
 - البريد الإلكتروني: `info@globalsmartsecurity.com`
 - Google Analytics ID: استبدل `G-XXXXXXXXXX`
-- Chatbase ID: استبدل `YOUR_CHATBASE_ID` (إذا كنت تستخدمه)
+- Chatbase: تم إزالته من الموقع (يمكن إعادة إضافته لاحقاً باستخدام `server.js`)
 - إحداثيات الموقع في Schema.org (إذا كان لديك)
 
 ✨ **نصائح:**

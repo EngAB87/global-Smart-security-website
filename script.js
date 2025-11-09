@@ -38,18 +38,73 @@ window.addEventListener('scroll', () => {
     const html = document.documentElement;
     const savedTheme = localStorage.getItem('theme') || 'light';
     html.setAttribute('data-theme', savedTheme);
+    
+    // Update theme-color meta tag immediately (before DOM is ready)
+    // This will be overridden by initDarkMode when DOM is ready, but ensures correct color on initial load
+    if (document.head) {
+        let themeColorMeta = document.getElementById('themeColorMeta');
+        if (themeColorMeta) {
+            themeColorMeta.content = savedTheme === 'dark' ? '#0f172a' : '#10b981';
+        }
+    }
 })();
+
+// Update theme-color meta tag
+function updateThemeColorMeta(theme) {
+    // Get or create theme-color meta tag
+    let themeColorMeta = document.getElementById('themeColorMeta');
+    
+    if (!themeColorMeta) {
+        // Create new meta tag if it doesn't exist
+        themeColorMeta = document.createElement('meta');
+        themeColorMeta.name = 'theme-color';
+        themeColorMeta.id = 'themeColorMeta';
+        
+        // Insert in head after manifest link
+        const manifestLink = document.querySelector('link[rel="manifest"]');
+        if (manifestLink && manifestLink.nextSibling) {
+            manifestLink.parentNode.insertBefore(themeColorMeta, manifestLink.nextSibling);
+        } else if (manifestLink) {
+            manifestLink.parentNode.appendChild(themeColorMeta);
+        } else {
+            document.head.appendChild(themeColorMeta);
+        }
+    }
+    
+    // Update content based on theme
+    if (theme === 'dark') {
+        themeColorMeta.content = '#0f172a'; // Dark theme color
+    } else {
+        themeColorMeta.content = '#10b981'; // Light theme color (primary green)
+    }
+    
+    // Also update msapplication-TileColor
+    let tileColorMeta = document.querySelector('meta[name="msapplication-TileColor"]');
+    if (!tileColorMeta) {
+        tileColorMeta = document.createElement('meta');
+        tileColorMeta.name = 'msapplication-TileColor';
+        document.head.appendChild(tileColorMeta);
+    }
+    tileColorMeta.content = theme === 'dark' ? '#0f172a' : '#10b981';
+}
 
 // Wait for DOM to be ready before accessing elements
 function initDarkMode() {
     const html = document.documentElement;
 const themeToggle = document.getElementById('themeToggle');
     
-    if (!themeToggle) return;
+    if (!themeToggle) {
+        // Still update theme color even if toggle button doesn't exist
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', savedTheme);
+        updateThemeColorMeta(savedTheme);
+        return;
+    }
     
     // Ensure theme is set
     const savedTheme = localStorage.getItem('theme') || 'light';
     html.setAttribute('data-theme', savedTheme);
+    updateThemeColorMeta(savedTheme);
 
 // Update icon based on theme
 function updateThemeIcon() {
@@ -73,6 +128,7 @@ themeToggle.addEventListener('click', () => {
     html.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateThemeIcon();
+        updateThemeColorMeta(newTheme);
     
     // Add animation
     themeToggle.style.transform = 'rotate(360deg) scale(1.2)';
@@ -193,13 +249,22 @@ function addShareButtonsToProducts() {
         shareDiv.className = 'product-share';
         shareDiv.innerHTML = `
             <span>مشاركة:</span>
-            <button class="share-btn" onclick="shareProduct('${productTitle}', '${productUrl}')" title="مشاركة عبر واتساب">
+            <button class="share-btn share-whatsapp" onclick="shareProduct('${productTitle}', '${productUrl}', 'whatsapp')" title="مشاركة عبر واتساب">
                 <i class="fab fa-whatsapp"></i>
             </button>
-            <button class="share-btn" onclick="shareProduct('${productTitle}', '${productUrl}', 'facebook')" title="مشاركة على فيسبوك">
+            <button class="share-btn share-facebook" onclick="shareProduct('${productTitle}', '${productUrl}', 'facebook')" title="مشاركة على فيسبوك">
                 <i class="fab fa-facebook-f"></i>
             </button>
-            <button class="share-btn" onclick="copyProductLink('${productUrl}', event)" title="نسخ الرابط">
+            <button class="share-btn share-twitter" onclick="shareProduct('${productTitle}', '${productUrl}', 'twitter')" title="مشاركة على تويتر">
+                <i class="fab fa-twitter"></i>
+            </button>
+            <button class="share-btn share-telegram" onclick="shareProduct('${productTitle}', '${productUrl}', 'telegram')" title="مشاركة عبر تيليجرام">
+                <i class="fab fa-telegram"></i>
+            </button>
+            <button class="share-btn share-linkedin" onclick="shareProduct('${productTitle}', '${productUrl}', 'linkedin')" title="مشاركة على لينكد إن">
+                <i class="fab fa-linkedin-in"></i>
+            </button>
+            <button class="share-btn share-copy" onclick="copyProductLink('${productUrl}', event)" title="نسخ الرابط">
                 <i class="fas fa-link"></i>
             </button>
         `;
@@ -411,16 +476,59 @@ contactForm.addEventListener('submit', (e) => {
 // Share Product Function
 function shareProduct(productName, url, platform = 'whatsapp') {
     const shareText = `شاهد ${productName} من Global Smart Security: ${url}`;
+    const shareTitle = `${productName} - Global Smart Security`;
     
-    if (platform === 'whatsapp') {
-        window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
-    } else if (platform === 'facebook') {
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
-    } else if (platform === 'twitter') {
-        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(url)}`, '_blank');
+    // Check if Web Share API is available
+    if (navigator.share && platform === 'native') {
+        navigator.share({
+            title: shareTitle,
+            text: shareText,
+            url: url
+        }).then(() => {
+            if (typeof showToast === 'function') {
+                showToast('نجح!', 'تم المشاركة بنجاح', 'success');
+            }
+        }).catch((error) => {
+            console.log('Error sharing:', error);
+        });
+        return;
     }
     
-    showToast('تم المشاركة!', `جاري فتح ${platform === 'whatsapp' ? 'واتساب' : platform === 'facebook' ? 'فيسبوك' : 'تويتر'}...`, 'info');
+    // Platform-specific sharing
+    let shareUrl = '';
+    let platformName = '';
+    
+    switch(platform) {
+        case 'whatsapp':
+            shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+            platformName = 'واتساب';
+            break;
+        case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+            platformName = 'فيسبوك';
+            break;
+        case 'twitter':
+            shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(url)}`;
+            platformName = 'تويتر';
+            break;
+        case 'telegram':
+            shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(shareText)}`;
+            platformName = 'تيليجرام';
+            break;
+        case 'linkedin':
+            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+            platformName = 'لينكد إن';
+            break;
+        default:
+            return;
+    }
+    
+    if (shareUrl) {
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+        if (typeof showToast === 'function') {
+            showToast('تم المشاركة!', `جاري فتح ${platformName}...`, 'info');
+        }
+    }
 }
 
 // Copy Product Link
@@ -1014,61 +1122,167 @@ if ('IntersectionObserver' in window) {
     });
 
     document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            imageObserver.observe(img);
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
         });
     });
 }
 
-// Chatbase User Identification
-// يتم استدعاء هذه الدالة عند تسجيل دخول المستخدم
-async function identifyChatbaseUser() {
-    try {
-        // الحصول على token من server
-        const response = await fetch('/api/chatbase/token', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                // أضف أي headers مطلوبة للـ authentication
-                // 'Authorization': `Bearer ${userToken}`
-            },
-            credentials: 'include' // لإرسال cookies
-        });
+// Chatbase User Identification - تم إزالة Chatbase
+// الكود محذوف - إذا أردت إعادة إضافته لاحقاً، يمكنك استخدام server.js
 
-        if (!response.ok) {
-            console.error('Failed to get Chatbase token');
+// Cookie Consent Banner
+(function() {
+    'use strict';
+    
+    // Wait for DOM to be ready
+    const initCookieConsent = () => {
+        const cookieConsent = document.getElementById('cookieConsent');
+        const cookieAccept = document.getElementById('cookieAccept');
+        const cookieDecline = document.getElementById('cookieDecline');
+        
+        if (!cookieConsent || !cookieAccept || !cookieDecline) {
+            console.warn('⚠️ Cookie Consent: Elements not found, retrying...');
+            // Retry after a short delay
+            setTimeout(initCookieConsent, 500);
             return;
         }
-
-        const data = await response.json();
-        const token = data.token;
-
-        // تحديد هوية المستخدم في Chatbase
-        if (window.chatbase) {
-            window.chatbase('identify', { token });
-            console.log('User identified in Chatbase');
+        
+        console.log('✅ Cookie Consent: Elements found, initializing...');
+        
+        // Check if user has already made a choice
+        const cookieConsentChoice = localStorage.getItem('cookieConsent');
+        const cookieConsentDate = localStorage.getItem('cookieConsentDate');
+        
+        // Show banner if no choice was made or if it's been more than 365 days
+        const shouldShowBanner = () => {
+            if (!cookieConsentChoice) {
+                return true;
+            }
+            
+            if (cookieConsentDate) {
+                try {
+                    const consentDate = new Date(cookieConsentDate);
+                    const currentDate = new Date();
+                    const daysSinceConsent = Math.floor((currentDate - consentDate) / (1000 * 60 * 60 * 24));
+                    
+                    // Show again after 365 days
+                    if (daysSinceConsent > 365) {
+                        return true;
+                    }
+                } catch (e) {
+                    // If date is invalid, show banner again
+                    return true;
+                }
+            }
+            
+            return false;
+        };
+        
+        // Show banner with animation
+        const showBanner = () => {
+            if (cookieConsent) {
+                console.log('📢 Cookie Consent: Showing banner...');
+                cookieConsent.style.display = 'block';
+                cookieConsent.style.visibility = 'visible';
+                // Force reflow
+                cookieConsent.offsetHeight;
+                requestAnimationFrame(() => {
+                    setTimeout(() => {
+                        cookieConsent.classList.add('show');
+                        console.log('✅ Cookie Consent: Banner displayed');
+                    }, 100);
+                });
+            } else {
+                console.error('❌ Cookie Consent: Element not found when trying to show');
+            }
+        };
+        
+        // Hide banner with animation
+        const hideBanner = () => {
+            if (cookieConsent) {
+                cookieConsent.classList.remove('show');
+                setTimeout(() => {
+                    cookieConsent.style.display = 'none';
+                }, 500);
+            }
+        };
+        
+        // Save user's choice
+        const saveCookieChoice = (choice) => {
+            try {
+                localStorage.setItem('cookieConsent', choice);
+                localStorage.setItem('cookieConsentDate', new Date().toISOString());
+                hideBanner();
+                
+                // Optional: Show a toast notification if function exists
+                if (typeof showToast === 'function') {
+                    if (choice === 'accepted') {
+                        showToast('success', 'شكراً لك!', 'تم حفظ تفضيلاتك بنجاح.');
+                    } else {
+                        showToast('info', 'تم الحفظ', 'سيتم احترام تفضيلاتك.');
+                    }
+                }
+            } catch (e) {
+                console.error('Error saving cookie consent:', e);
+            }
+        };
+        
+        // Event listeners
+        cookieAccept.addEventListener('click', (e) => {
+            e.preventDefault();
+            saveCookieChoice('accepted');
+        });
+        
+        cookieDecline.addEventListener('click', (e) => {
+            e.preventDefault();
+            saveCookieChoice('declined');
+        });
+        
+        // Show banner on page load if needed
+        if (shouldShowBanner()) {
+            console.log('✅ Cookie Consent: Banner should be shown');
+            // Show after page is fully loaded
+            if (document.readyState === 'complete') {
+                setTimeout(showBanner, 800);
+            } else {
+                window.addEventListener('load', () => {
+                    setTimeout(showBanner, 800);
+                });
+            }
         } else {
-            // انتظر حتى يتم تحميل Chatbase script
-            setTimeout(identifyChatbaseUser, 500);
+            console.log('ℹ️ Cookie Consent: User has already made a choice');
+            // Hide banner if user has already made a choice
+            hideBanner();
         }
-    } catch (error) {
-        console.error('Error identifying user in Chatbase:', error);
-    }
-}
-
-// استدعاء identifyChatbaseUser عند:
-// 1. تحميل الصفحة (إذا كان المستخدم مسجل دخول)
-// 2. بعد تسجيل الدخول
-// 3. عند تحديث session
-
-// مثال: استدعاء عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', () => {
-    // تحقق إذا كان المستخدم مسجل دخول
-    // const isLoggedIn = checkUserLogin(); // دالة يجب إنشاؤها
-    // if (isLoggedIn) {
-    //     identifyChatbaseUser();
-    // }
+    };
     
-    // للاختبار - يمكنك تفعيل هذا
-    // identifyChatbaseUser();
-});
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            // Delay to ensure all elements are ready
+            setTimeout(initCookieConsent, 100);
+        });
+    } else {
+        // DOM is already ready
+        setTimeout(initCookieConsent, 100);
+    }
+})();
+
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then((registration) => {
+                console.log('[Service Worker] Registered successfully:', registration.scope);
+                
+                // Check for updates every hour
+                setInterval(() => {
+                    registration.update();
+                }, 3600000); // 1 hour
+            })
+            .catch((error) => {
+                console.error('[Service Worker] Registration failed:', error);
+            });
+    });
+}

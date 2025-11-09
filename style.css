@@ -1413,10 +1413,11 @@ box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
 .product-share {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 0.6rem;
     margin-top: 1.5rem;
     padding-top: 1.5rem;
     border-top: 1px solid var(--border-color);
+    flex-wrap: wrap;
 }
 
 [data-theme="dark"] .product-share {
@@ -1427,13 +1428,27 @@ box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
     font-size: 0.9rem;
     color: var(--text-light);
     font-weight: 600;
+    margin-left: auto;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .product-share span {
+        width: auto;
+        margin-left: 0;
+        margin-bottom: 0;
+        margin-right: auto;
+    }
 }
 
 .product-share .share-btn {
     background: rgba(16, 185, 129, 0.1);
     border: 1px solid rgba(16, 185, 129, 0.2);
     border-radius: 8px;
-    padding: 0.5rem 0.8rem;
+    padding: 0.5rem;
+    width: 36px;
+    height: 36px;
     color: #10b981;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -1441,17 +1456,89 @@ box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .product-share .share-btn:hover {
-    background: rgba(16, 185, 129, 0.2);
-    border-color: #10b981;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
 }
 
 .product-share .share-btn:active {
-    transform: translateY(0);
+    transform: translateY(-1px) scale(1.05);
+}
+
+/* Platform-specific colors */
+.share-whatsapp {
+    background: rgba(37, 211, 102, 0.1) !important;
+    border-color: rgba(37, 211, 102, 0.3) !important;
+    color: #25d366 !important;
+}
+
+.share-whatsapp:hover {
+    background: rgba(37, 211, 102, 0.2) !important;
+    border-color: #25d366 !important;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4) !important;
+}
+
+.share-facebook {
+    background: rgba(24, 119, 242, 0.1) !important;
+    border-color: rgba(24, 119, 242, 0.3) !important;
+    color: #1877f2 !important;
+}
+
+.share-facebook:hover {
+    background: rgba(24, 119, 242, 0.2) !important;
+    border-color: #1877f2 !important;
+    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.4) !important;
+}
+
+.share-twitter {
+    background: rgba(29, 161, 242, 0.1) !important;
+    border-color: rgba(29, 161, 242, 0.3) !important;
+    color: #1da1f2 !important;
+}
+
+.share-twitter:hover {
+    background: rgba(29, 161, 242, 0.2) !important;
+    border-color: #1da1f2 !important;
+    box-shadow: 0 4px 12px rgba(29, 161, 242, 0.4) !important;
+}
+
+.share-telegram {
+    background: rgba(37, 150, 190, 0.1) !important;
+    border-color: rgba(37, 150, 190, 0.3) !important;
+    color: #2596be !important;
+}
+
+.share-telegram:hover {
+    background: rgba(37, 150, 190, 0.2) !important;
+    border-color: #2596be !important;
+    box-shadow: 0 4px 12px rgba(37, 150, 190, 0.4) !important;
+}
+
+.share-linkedin {
+    background: rgba(10, 102, 194, 0.1) !important;
+    border-color: rgba(10, 102, 194, 0.3) !important;
+    color: #0a66c2 !important;
+}
+
+.share-linkedin:hover {
+    background: rgba(10, 102, 194, 0.2) !important;
+    border-color: #0a66c2 !important;
+    box-shadow: 0 4px 12px rgba(10, 102, 194, 0.4) !important;
+}
+
+.share-copy {
+    background: rgba(107, 114, 128, 0.1) !important;
+    border-color: rgba(107, 114, 128, 0.3) !important;
+    color: #6b7280 !important;
+}
+
+.share-copy:hover {
+    background: rgba(107, 114, 128, 0.2) !important;
+    border-color: #6b7280 !important;
+    box-shadow: 0 4px 12px rgba(107, 114, 128, 0.4) !important;
 }
 
 [data-theme="dark"] .product-share .share-btn {
@@ -1461,6 +1548,23 @@ box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
 
 [data-theme="dark"] .product-share .share-btn:hover {
     background: rgba(16, 185, 129, 0.25);
+}
+
+/* Share button copied state */
+.product-share .share-btn.copied {
+    background: rgba(16, 185, 129, 0.3) !important;
+    border-color: #10b981 !important;
+    color: #10b981 !important;
+    animation: shareButtonPulse 0.5s ease;
+}
+
+@keyframes shareButtonPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
 }
 
 .product-features {
@@ -2998,6 +3102,271 @@ footer::after {
     }
 }
 
+/* Cookie Consent Banner */
+.cookie-consent {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 999999 !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(20px);
+    border-top: 2px solid rgba(16, 185, 129, 0.3);
+    box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.15);
+    padding: 1.5rem 2rem;
+    transform: translateY(100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.cookie-consent.show {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+[data-theme="dark"] .cookie-consent {
+    background: rgba(15, 23, 42, 0.98);
+    border-top-color: rgba(16, 185, 129, 0.5);
+    box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+}
+
+.cookie-consent-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.cookie-consent-icon {
+    font-size: 2.5rem;
+    color: #10b981;
+    flex-shrink: 0;
+    animation: cookieBounce 2s ease-in-out infinite;
+}
+
+[data-theme="dark"] .cookie-consent-icon {
+    color: #10b981;
+}
+
+.cookie-consent-text {
+    flex: 1;
+    min-width: 250px;
+}
+
+.cookie-consent-text h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+}
+
+[data-theme="dark"] .cookie-consent-text h4 {
+    color: #ffffff;
+}
+
+.cookie-consent-text p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-light);
+    margin: 0;
+}
+
+[data-theme="dark"] .cookie-consent-text p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.cookie-consent-text a {
+    color: #10b981;
+    text-decoration: underline;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.cookie-consent-text a:hover {
+    color: #059669;
+}
+
+[data-theme="dark"] .cookie-consent-text a {
+    color: #34d399;
+}
+
+[data-theme="dark"] .cookie-consent-text a:hover {
+    color: #10b981;
+}
+
+.cookie-consent-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.cookie-btn {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cookie-btn-accept {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #ffffff;
+}
+
+.cookie-btn-accept:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.cookie-btn-accept:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+}
+
+.cookie-btn-decline {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 2px solid #ef4444;
+}
+
+.cookie-btn-decline:hover {
+    background: rgba(239, 68, 68, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+}
+
+.cookie-btn-decline:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(239, 68, 68, 0.2);
+}
+
+[data-theme="dark"] .cookie-btn-decline {
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+    border-color: #ef4444;
+}
+
+[data-theme="dark"] .cookie-btn-decline:hover {
+    background: rgba(239, 68, 68, 0.3);
+}
+
+@keyframes cookieBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@media (max-width: 768px) {
+    .product-share {
+        gap: 0.5rem;
+        padding-top: 1.2rem;
+        margin-top: 1.2rem;
+    }
+    
+    .product-share .share-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+        padding: 0.4rem;
+    }
+    
+    .product-share span {
+        font-size: 0.85rem;
+        margin-bottom: 0.4rem;
+    }
+    
+    .cookie-consent {
+        padding: 1.2rem 1.5rem;
+    }
+    
+    .cookie-consent-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .cookie-consent-icon {
+        font-size: 2rem;
+    }
+    
+    .cookie-consent-text {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .cookie-consent-text h4 {
+        font-size: 1.1rem;
+    }
+    
+    .cookie-consent-text p {
+        font-size: 0.9rem;
+    }
+    
+    .cookie-consent-buttons {
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .cookie-btn {
+        width: 100%;
+        padding: 0.9rem 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-share {
+        gap: 0.4rem;
+        padding-top: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .product-share .share-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.85rem;
+        padding: 0.35rem;
+    }
+    
+    .product-share span {
+        font-size: 0.8rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .cookie-consent {
+        padding: 1rem;
+    }
+    
+    .cookie-consent-icon {
+        font-size: 1.8rem;
+    }
+    
+    .cookie-consent-text h4 {
+        font-size: 1rem;
+    }
+    
+    .cookie-consent-text p {
+        font-size: 0.85rem;
+    }
+    
+    .cookie-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
 /* About Us Section */
 .about-content {
     max-width: 1000px;
@@ -3755,7 +4124,7 @@ footer::after {
 }
 
 .chatbot-popup-info h4 {
-    font-size: 1.1rem;
+        font-size: 1.1rem;
     font-weight: 800;
     margin: 0 0 0.3rem 0;
     color: white;

@@ -29,9 +29,59 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://globalsmartsecurity.com/">
     
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" href="https://globalsmartsecurity.com/sitemap.xml">
+    
     <title>Global Smart Security - أنظمة الأمان والمراقبة المتقدمة</title>
+    
+    <!-- Favicon - Multiple Sizes -->
+    <!-- Standard Favicons -->
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
+    
+    <!-- Apple Touch Icons - Multiple Sizes -->
+    <link rel="apple-touch-icon" sizes="57x57" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="favicon.png">
+    
+    <!-- Microsoft Tiles -->
+    <meta name="msapplication-TileImage" content="favicon.png">
+    <meta name="msapplication-square70x70logo" content="favicon.png">
+    <meta name="msapplication-square150x150logo" content="favicon.png">
+    <meta name="msapplication-wide310x150logo" content="favicon.png">
+    <meta name="msapplication-square310x310logo" content="favicon.png">
+    
+    <!-- Fallback Favicon -->
+    <link rel="shortcut icon" href="favicon.png">
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon" href="favicon.png">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Theme Color Meta Tags (will be updated dynamically by JavaScript) -->
+    <meta name="theme-color" content="#10b981" id="themeColorMeta">
+    <meta name="msapplication-TileColor" content="#10b981">
+    <meta name="msapplication-navbutton-color" content="#10b981">
+    
+    <!-- Mobile Web App Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="GSS">
+    <meta name="application-name" content="Global Smart Security">
+    <meta name="msapplication-starturl" content="/">
+    <meta name="msapplication-tap-highlight" content="no">
     <!-- Performance: Resource Hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,19 +130,6 @@
                 <div class="spinner"></div>
             </div>
             <p class="loading-text">جاري التحميل...</p>
-            <!--Start of Tawk.to Script-->
-                <script type="text/javascript">
-                var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-                    (function(){
-                var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-                s1.async=true;
-                s1.src='https://embed.tawk.to/690e271cd595531950b93ae0/1j9fkhi0h';
-                s1.charset='UTF-8';
-                s1.setAttribute('crossorigin','*');
-                s0.parentNode.insertBefore(s1,s0);
-                })();
-        </script>
-        <!--End of Tawk.to Script-->
         </div>
     </div>
     <!-- Header -->
@@ -985,6 +1022,20 @@
             </div>
             <div class="contact-content">
                 <!-- Google Maps -->
+                <!-- 
+                    ملاحظة: لتحديث خريطة Google Maps:
+                    1. افتح https://www.google.com/maps
+                    2. ابحث عن عنوان موقعك الفعلي
+                    3. اضغط على زر "مشاركة" (Share)
+                    4. اختر "تضمين خريطة" (Embed a map)
+                    5. اختر الحجم (Medium recommended)
+                    6. انسخ الكود من <iframe src="..."> وألصقه هنا
+                    7. تأكد من تحديث الإحداثيات في Schema.org أيضاً (السطر 1269-1270)
+                    
+                    الإحداثيات الحالية: القاهرة (مثال)
+                    - latitude: 30.0444
+                    - longitude: 31.2357
+                -->
                 <div class="contact-map">
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.5!2d31.2357!3d30.0444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAyJzQwLjAiTiAzMcKwMTQnMDguNSJF!5e0!3m2!1sar!2seg!4v1234567890123!5m2!1sar!2seg" 
@@ -994,7 +1045,8 @@
                         allowfullscreen="" 
                         loading="lazy" 
                         referrerpolicy="no-referrer-when-downgrade"
-                        title="موقع Global Smart Security">
+                        title="موقع Global Smart Security"
+                        aria-label="خريطة موقع Global Smart Security">
                     </iframe>
                 </div>
                 
@@ -1048,9 +1100,12 @@
                             <a href="https://wa.me/201121153344" target="_blank" rel="noopener noreferrer" class="social-icon whatsapp">
                                 <i class="fab fa-whatsapp"></i>
                             </a>
+                            <!-- Instagram Link - مخفي مؤقتاً حتى يتم إنشاء الصفحة -->
+                            <!--
                             <a href="https://www.instagram.com/YourPageName" target="_blank" rel="noopener noreferrer" class="social-icon instagram">
                                 <i class="fab fa-instagram"></i>
                             </a>
+                            -->
                         </div>
                     </div>
                 </div>
@@ -1166,12 +1221,58 @@
     <!-- Toast Notification Container -->
     <div id="toastContainer" class="toast-container"></div>
     
+    <!-- Cookie Consent Banner -->
+    <div id="cookieConsent" class="cookie-consent" style="display: none;">
+        <div class="cookie-consent-content">
+            <div class="cookie-consent-icon">
+                <i class="fas fa-cookie-bite"></i>
+            </div>
+            <div class="cookie-consent-text">
+                <h4>ملفات تعريف الارتباط (Cookies)</h4>
+                <p>نستخدم ملفات تعريف الارتباط لتحسين تجربتك على موقعنا. من خلال الاستمرار في التصفح، أنت توافق على استخدامنا لملفات تعريف الارتباط. 
+                    <a href="privacy-policy.html" target="_blank">اقرأ المزيد</a>
+                </p>
+            </div>
+            <div class="cookie-consent-buttons">
+                <button id="cookieAccept" class="cookie-btn cookie-btn-accept">موافق</button>
+                <button id="cookieDecline" class="cookie-btn cookie-btn-decline">رفض</button>
+            </div>
+        </div>
+    </div>
+    
     <!-- Schema.org Structured Data -->
+    <!-- 
+        ملاحظة: قم بتحديث المعلومات التالية بالمعلومات الصحيحة:
+        
+        العنوان:
+        - streetAddress: شارع ورقم الشارع الفعلي
+        - addressLocality: اسم المدينة (مثلاً: القاهرة، الإسكندرية)
+        - addressRegion: اسم المحافظة (مثلاً: القاهرة، الإسكندرية)
+        - postalCode: الرمز البريدي (إذا كان متوفراً)
+        
+        الإحداثيات (Coordinates):
+        - latitude: خط العرض (مثلاً: 30.0444 للقاهرة)
+        - longitude: خط الطول (مثلاً: 31.2357 للقاهرة)
+        
+        كيفية الحصول على الإحداثيات:
+        1. افتح Google Maps
+        2. ابحث عن عنوانك
+        3. اضغط بزر الماوس الأيمن على الموقع
+        4. اختر "What's here?"
+        5. ستظهر الإحداثيات في مربع البحث (مثلاً: 30.0444, 31.2357)
+        6. الرقم الأول هو latitude، والثاني هو longitude
+        
+        مثال للإحداثيات:
+        - القاهرة: latitude: "30.0444", longitude: "31.2357"
+        - الإسكندرية: latitude: "31.2001", longitude: "29.9187"
+        - الجيزة: latitude: "30.0131", longitude: "31.2089"
+    -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "Global Smart Security",
+        "alternateName": "GSS",
         "image": "https://globalsmartsecurity.com/logo.png",
         "@id": "https://globalsmartsecurity.com",
         "url": "https://globalsmartsecurity.com",
@@ -1179,13 +1280,17 @@
         "email": "info@globalsmartsecurity.com",
         "address": {
             "@type": "PostalAddress",
+            "streetAddress": "شارع [اسم الشارع]", 
+            "addressLocality": "[المدينة]",
+            "addressRegion": "[المحافظة]",
+            "postalCode": "[الرمز البريدي]",
             "addressCountry": "EG",
-            "addressLocality": "Egypt"
+            "addressCountryName": "Egypt"
         },
         "geo": {
             "@type": "GeoCoordinates",
-            "latitude": "",
-            "longitude": ""
+            "latitude": "30.0444",
+            "longitude": "31.2357"
         },
         "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",
@@ -1260,19 +1365,27 @@
     }
     </script>
 
-    <!-- Chatbase Integration -->
-    <script>
-        // Chatbase Widget Script (استبدل YOUR_CHATBASE_ID بـ ID الخاص بك)
+    <script src="script.js"></script>
+    
+    <!-- Tawk.to Chat Widget -->
+    <!-- 
+        ملاحظة: Tawk.to هو خدمة دردشة مباشرة مجانية
+        - ID الحالي: 690e271cd595531950b93ae0/1j9fkhi0h
+        - إذا كنت تريد تغييره، سجل حساب جديد على https://www.tawk.to
+        - ثم انسخ كود التضمين وألصقه هنا
+    -->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {};
+        var Tawk_LoadStart = new Date();
         (function() {
-            var chatbaseScript = document.createElement('script');
-            chatbaseScript.src = 'https://www.chatbase.co/embed.min.js';
-            chatbaseScript.setAttribute('chatbot-id', 'YOUR_CHATBASE_ID'); // استبدل هذا
-            chatbaseScript.setAttribute('domain', 'https://www.chatbase.co');
-            chatbaseScript.defer = true;
-            document.head.appendChild(chatbaseScript);
+            var s1 = document.createElement("script");
+            var s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/690e271cd595531950b93ae0/1j9fkhi0h';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
         })();
     </script>
-
-    <script src="script.js"></script>
 </body>
 </html>

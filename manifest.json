@@ -1,0 +1,79 @@
+{
+  "name": "Global Smart Security - أنظمة الأمان والمراقبة المتقدمة",
+  "short_name": "GSS",
+  "description": "شريكك الموثوق في حلول الأمان والمراقبة المتقدمة. أنظمة الكاميرات، DVR/NVR، أنظمة الكاشير، أنظمة الحسابات، والجرافيك ديزاين.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#10b981",
+  "orientation": "any",
+  "scope": "/",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "16x16",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "categories": ["business", "productivity", "utilities"],
+  "shortcuts": [
+    {
+      "name": "الكاميرات",
+      "short_name": "كاميرات",
+      "description": "عرض أنظمة الكاميرات",
+      "url": "/#cameras",
+      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "أنظمة الكاشير",
+      "short_name": "كاشير",
+      "description": "عرض أنظمة نقاط البيع",
+      "url": "/#pos",
+      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "اتصل بنا",
+      "short_name": "اتصال",
+      "description": "تواصل معنا",
+      "url": "/#contact",
+      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
+
