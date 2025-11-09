@@ -374,10 +374,10 @@ header.scrolled .header-social-icon {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    gap: 2rem;
-    max-width: 1200px;
+    gap: 1.5rem;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 25px;
 }
 
 .nav-right {
@@ -634,7 +634,7 @@ header.scrolled .header-social-icon {
     display: -ms-flexbox;
     display: flex;
     list-style: none;
-    gap: 0.5rem;
+    gap: 0.8rem;
     -webkit-align-items: center;
     -moz-align-items: center;
     -ms-flex-align: center;
@@ -643,6 +643,8 @@ header.scrolled .header-social-icon {
     -moz-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-menu a {
@@ -654,12 +656,13 @@ header.scrolled .header-social-icon {
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
-    padding: 0.6rem 1.2rem;
+    padding: 0.6rem 1rem;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
     position: relative;
     white-space: nowrap;
+    display: inline-block;
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
