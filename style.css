@@ -3808,107 +3808,37 @@ footer::after {
         display: none;
     }
     
-    /* Show hamburger on mobile */
-    .hamburger {
-        display: flex !important;
-    }
-    
-    /* Hide nav menu by default on mobile - show hamburger instead */
     .nav-menu {
-        display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-        pointer-events: none !important;
-        position: absolute !important;
-        top: -9999px !important;
-        left: -9999px !important;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--bg-color);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.5s ease-in-out;
+        display: flex;
+        transform: translateX(100%);
+        z-index: 1000;
     }
-    
+
     .nav-menu.active {
-        display: flex !important;
-        position: fixed !important;
-        top: 0 !important;
-        right: 0 !important;
-        width: 100% !important;
-        height: 100vh !important;
-        height: 100dvh !important;
-        background-color: var(--bg-color) !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out !important;
-        transform: translateX(0) !important;
-        z-index: 1000 !important;
-        -webkit-overflow-scrolling: touch;
-        padding: 2rem 0 !important;
-        gap: 0.5rem !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        pointer-events: auto !important;
-    }
-    
-    /* Force hide nav menu when not active on mobile */
-    .nav-menu:not(.active) {
-        display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-        pointer-events: none !important;
-        position: absolute !important;
-        top: -9999px !important;
-        left: -9999px !important;
-        width: 0 !important;
-        height: 0 !important;
-        overflow: hidden !important;
-    }
-    
-    /* Ensure nav menu items are hidden when menu is not active */
-    .nav-menu:not(.active) a,
-    .nav-menu:not(.active) li {
-        display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
+        transform: translateX(0);
     }
 
-    .nav-menu.active a {
-        font-size: 1rem;
-        margin: 0;
-        padding: 1rem 1.5rem;
-        width: 80%;
-        max-width: 280px;
+    .nav-menu a {
+        font-size: 1.3rem;
+        margin: 0.8rem 0;
+        padding: 0.8rem 1.5rem;
+        width: 90%;
         text-align: center;
-        border-radius: 10px;
-        background: transparent;
-        color: rgba(255, 255, 255, 0.95);
-        font-weight: 500;
-        transition: all 0.3s ease;
-        border: none;
-        display: block;
-    }
-    
-    .nav-menu.active a:hover {
-        background: rgba(255, 255, 255, 0.08);
-        color: #ffffff;
     }
 
-    .nav-menu.active a.active {
-        background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%) !important;
-        color: white !important;
-        font-weight: 600;
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
-        transform: scale(1.02);
-    }
-    
-    [data-theme="dark"] .nav-menu.active {
-        background-color: rgba(15, 23, 42, 0.98) !important;
-    }
-    
-    [data-theme="dark"] .nav-menu.active a {
-        color: rgba(255, 255, 255, 0.95);
-    }
-    
-    [data-theme="dark"] .nav-menu.active a.active {
-        background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%) !important;
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
+    .nav-menu a.active {
+        background: var(--gradient-primary);
+        color: white;
     }
 
     .hamburger {
@@ -3926,6 +3856,11 @@ footer::after {
 
     .hamburger.active span:nth-child(3) {
         transform: rotate(-45deg) translate(5px, -5px);
+    }
+    
+    [data-theme="dark"] .nav-menu.active a.active {
+        background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%) !important;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
     }
 
     .hero {
